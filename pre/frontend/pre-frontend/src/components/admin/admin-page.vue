@@ -1,7 +1,7 @@
 <template>
     <div>
         <GmapMap
-            :center="{ lat: 46.545304, lng: -72.750642 }"
+            :center="center"
             :zoom="16"
             map-type-id="terrain"
             style="width: 500px; height: 300px"
@@ -10,6 +10,8 @@
                 v-for="(address, index) in addresses"
                 :key="index"
                 :position="{ lat: address.lat, lng: address.lng }"
+                :clickable="true"
+                title="foobar"
             >
             </GmapMarker>
         </GmapMap>
@@ -38,6 +40,8 @@
      components: { QuestionForm },
      data() {
          return {
+             data: [],
+             center: { lat: 46.545304, lng: -72.750642 },
              addresses: [],
              address: undefined,
              form: {},
@@ -45,6 +49,7 @@
      },
      async created() {
          const response = await axios.get('http://localhost:8081/admin');
+         
          this.addresses = response.data.map((item) => {
             return { lat: parseFloat(item.lat), lng: parseFloat(item.lng) };
          });

@@ -7,14 +7,15 @@ module.exports = (app) => {
     res.send(questions);
   });
 
-  app.post('/address', async(req, res) => {
+  app.post('/in_risk', async(req, res) => {
     req.session.address = req.body.address;
 
-    res.send({ isFlooded: await floodingArea.addressInRisk(req.body.address) });
+    res.send({ inRisk: await floodingArea.addressInRisk(req.body.address) });
   });
 
-  app.get('/flooding_risk', async(req, res) => {
-    res.send({ maps: await floodingArea.all() });
+  app.get('/flooding_risk/:region?', async(req, res) => {
+  
+    res.send({ maps: await floodingArea.region(req.params.region) });
   });
 
 

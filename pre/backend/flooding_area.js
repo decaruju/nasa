@@ -1,9 +1,6 @@
 const inside = require('point-in-geopolygon');
 const store = require('./store');
 
-// store.getMap().then((map) => {
-//   console.log('map::', Object.values(map["features"]).map((e) => e['properties']['mrs_nm_mrc']));
-// });
 
 module.exports = {
   async addressInRisk({ latitude, longitude }) {    
@@ -14,5 +11,18 @@ module.exports = {
   
   all() {
     return store.getMap();
+  },
+  async region(name) {
+    const data = await store.getMap();
+    
+    return Object.values(data["features"])
+      .filter((e) => e['properties']['mrs_nm_mrc'] && e['properties']['mrs_nm_mrc'].toLocaleLowerCase() == name.toLocaleLowerCase())
+      .map((e) => {
+        return e['geometry']['coordinates'].map((e) => {
+             return e[0].map((geo) => {
+                return { lng: geo[0], lat: geo[1] };
+             })
+         })
+      })[0];
   }
 };
