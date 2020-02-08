@@ -56,7 +56,7 @@ app.post('/address', (req, res) => {
     res.send({ id: next, flood: pascal.isFlood(req.body.address) });
 });
 
-app.post('/question', (req, res) => {
+app.post('/answers', (req, res) => {
   res.send({ message: 'merci' });
 });
 
