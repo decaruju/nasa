@@ -10,13 +10,18 @@ const r = require('rethinkdb');
 const app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
-app.use(cors());
 
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: false },
+}));
+
+app.use(cors({
+    origin:['http://localhost:8080'],
+    methods:['GET','POST'],
+    credentials: true // enable set cookie
 }));
 
 // let conn = null;
@@ -25,8 +30,6 @@ app.use(session({
 //   conn = connection;
 //   conn.use('dev')
 // });
-
-const data = {};
 
 app.get('/questions', (req, res) => {
   res.send([{
@@ -48,12 +51,9 @@ app.get('/questions', (req, res) => {
 });
 
 app.post('/address', (req, res) => {
-  const next = Object.keys(data).length;
-  data[next] = req.body.address;
-
   req.session.address = req.body.address;
 
-  res.send({ id: next, flood: pascal.isFlood(req.body.address) });
+  res.send({ flood: pascal.isFlood(req.body.address) });
 });
 
 app.listen(8081);

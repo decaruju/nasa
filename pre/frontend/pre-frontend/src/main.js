@@ -3,6 +3,8 @@ import App from './App.vue';
 import VueRouter from 'vue-router';
 import AddressForm from './components/address/address-form.vue';
 import QuestionForm from './components/question/question-form.vue';
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 Vue.config.productionTip = false;
 
