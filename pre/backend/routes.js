@@ -10,7 +10,13 @@ module.exports = (app) => {
   app.post('/in_risk', async(req, res) => {
     req.session.address = req.body.address;
 
-    res.send({ inRisk: await floodingArea.addressInRisk(req.body.address) });
+      const inRisk = await floodingArea.addressInRisk(req.body.address);
+      const response = { inRisk };
+      if (inRisk === -1) {
+          response.floodability = floodingArea.floodability(req.body.address.geometry.location);
+      }
+
+      res.send(response);
   });
 
   app.get('/flooding_risk/:region?', async(req, res) => {
