@@ -14,26 +14,28 @@
             </GmapMarker>
         </GmapMap>
         Entrez votre addresse.
-        <vue-google-autocomplete
-            id="map"
-            classname="form-control"
-            @placechanged="placeChanged"
-            country="ca"
-        />
+
+        <gmap-autocomplete
+          @place_changed="placeChanged">
+        </gmap-autocomplete>
+
+        <question-form v-if="address" v-model="form" :questions="questions" />
     </div>
 </template>
 
 <script>
- import VueGoogleAutocomplete from 'vue-google-autocomplete';
  import axios from 'axios';
+ import QuestionForm from '../question/question-form';
+
  export default {
      name: 'admin-page',
-     components: { VueGoogleAutocomplete },
+     components: { QuestionForm },
      data() {
          return {
              data: [],
              addresses: [],
              address: undefined,
+             form: {},
          };
      },
      async created() {
@@ -44,7 +46,10 @@
      },
      methods: {
         async placeChanged(address) {
+            this.address = undefined;
+            const response = await axios.get('http://localhost:8081/questions');
             this.address = address;
+            this.questions = response.data;
         },
      },
  };
