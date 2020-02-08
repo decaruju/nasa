@@ -1,24 +1,47 @@
 <template>
     <div class="address-input">
-        Entrez votre addresse.
+        <div class="input-container">
         <vue-google-autocomplete
             id="map"
             classname="form-control"
             @placechanged="placeChanged"
             country="ca"
+            placeholder=""
+            required
         />
+        <div class="placeholder">
+            Entrez votre adresse
+        </div>
+        </div>
+
         <div class="address-info" v-if="address">
+            <h1>
+                Vos informations :
+            </h1>
+
             <div>
-                Ville : {{ address.locality }}
+                <span class="field-name">
+                    Ville :
+                </span>
+                {{ address.locality }}
             </div>
             <div>
-                Province: {{ address.administrative_area_level_1 }}
+                <span class="field-name">
+                    Province:
+                </span>
+                {{ address.administrative_area_level_1 }}
             </div>
             <div>
-                Addresse: {{ address.street_number }} {{ address.route }}
+                <span class="field-name">
+                Addresse:
+                </span>
+                {{ address.street_number }} {{ address.route }}
             </div>
             <div>
-                Code postal: {{ address.postal_code }}
+                <span class="field-name">
+                Code postal:
+                </span>
+                {{ address.postal_code }}
             </div>
         </div>
         <div v-if="address" class="button-container">
@@ -56,34 +79,11 @@
 <style lang="scss">
  .address-input {
      height: 100px;
-     margin-top: 10%;
-     padding: 20%;
+     padding: 10% 20%;
  }
  #map {
      width: 100%;
      margin: 0 auto;
- }
- .button-container {
-     width: 100%;
-     padding: 20%;
-     box-sizing: border-box;
-
-     button {
-         width: 100%;
-         border: none;
-         padding: 10%;
-         font-size: 24px;
-         text-transform: uppercase;
-         border-radius: 20px;
-
-         &:hover {
-             background-color: aliceblue;
-         }
-
-         &:active {
-             background-color: wheat;
-         }
-     }
  }
 
 </style>

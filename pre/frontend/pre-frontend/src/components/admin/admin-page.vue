@@ -1,7 +1,7 @@
 <template>
     <div>
         <GmapMap
-            :center="{ lat: 46.545304, lng: -72.750642 }"
+            :center="center"
             :zoom="16"
             map-type-id="terrain"
             style="width: 500px; height: 300px"
@@ -10,10 +10,20 @@
                 v-for="(address, index) in addresses"
                 :key="index"
                 :position="{ lat: address.latitude, lng: address.longitude }"
+                :clickable="true"
+                @click="onClick(index)"
+                title="foobar"
             >
             </GmapMarker>
         </GmapMap>
-        poopoo
+        <template v-if="currentAddress">
+            <div v-for="(answer, index) in currentAddress.answers" :key="index">
+                {{ answer }}
+            </div>
+            <button @click="currentAddress = undefined">
+                Ignorer
+            </button>
+        </template>
     </div>
 </template>
 
@@ -24,14 +34,21 @@
      data() {
          return {
              data: [],
-             addresses: []
+             center: { lat: 46.545304, lng: -72.750642 },
+             addresses: [],
+             currentAddress: undefined,
          };
      },
      async created() {
          const response = await axios.get('http://localhost:8081/admin');
-         console.log(response)
          this.data = response.data;
          this.addresses = this.data.map((d) => d.address);
+     },
+     methods: {
+         onClick(index) {
+             this.currentAddress = this.data[index];
+             this.center = { lat: this.currentAddress.address.latitude, lng: this.currentAddress.address.longitude };
+         }
      }
  };
 </script>
