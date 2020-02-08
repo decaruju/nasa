@@ -28,7 +28,8 @@ app.use(session({
 app.get('/questions', (req, res) => {
   res.send([{
     id: 1,
-    text: 'premiere question'
+    text: 'premiere question',
+    test: req.session.address,
   }]);
 });
 
