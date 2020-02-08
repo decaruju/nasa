@@ -30,7 +30,6 @@ app.get('/questions', (req, res) => {
     id: 1,
     text: 'premiere question'
   }]);
-  res.send(res);
 });
 
 app.post('/address', (req, res) => {
