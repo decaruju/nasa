@@ -57,7 +57,12 @@ app.post('/address', (req, res) => {
 });
 
 app.post('/answers', (req, res) => {
+    data[req.body.id].answers = req.body.answers;
   res.send({ message: 'merci' });
+});
+
+app.get('/admin', (req, res) => {
+    res.send(Object.values(data));
 });
 
 app.listen(8081);
