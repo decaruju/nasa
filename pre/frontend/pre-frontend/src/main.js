@@ -3,9 +3,12 @@ import App from './App.vue';
 import VueRouter from 'vue-router';
 import AddressForm from './components/address/address-form.vue';
 import QuestionForm from './components/question/question-form.vue';
+import axios from 'axios';
 import ImageDisplay from './components/image/image-display.vue';
 import AdminPage from './components/admin/admin-page.vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
+
+axios.defaults.withCredentials = true;
 
 Vue.config.productionTip = false;
 
