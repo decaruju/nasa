@@ -18,8 +18,8 @@ app.use(session({
 }));
 
 app.use(cors({
-    origin:['http://localhost:8080'],
-    credentials: true // enable set cookie
+  origin:['http://localhost:8080'],
+  credentials: true // enable set cookie
 }));
 
 app.get('/questions', (req, res) => {
@@ -50,13 +50,13 @@ app.post('/address', (req, res) => {
 });
 
 app.post('/answers', (req, res) => {
-    const index = Object.keys(data).length;
-    data[index] = { answers: req.body.answers, address: req.session.address };
+  store.add({ answers: req.body.answers, address: req.session.address });
   res.send({ message: 'merci' });
 });
 
-app.get('/admin', (req, res) => {
-    res.send(Object.values(data));
+app.get('/admin', async (req, res) => {
+  const data = await store.fetchAll();
+  res.send(data);
 });
 
 app.listen(8081);
