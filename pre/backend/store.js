@@ -11,18 +11,21 @@ const seed = require('./seed.js');
 const data = {};
 const map = require('./geo.json');
 
-seed.forEach((item, index) => {
-  data[index] = item;
-});
-
-module.exports = {
+const store = {
   async fetchAll() {
-    return Object.values(data);
+    const latitudeValues = Object.values(data)
+    return latitudeValues.map((latitudeValue) => {
+      return Object.values(latitudeValue).slice(-1).pop();
+    }).flat();
   },
 
   async add(item) {
-    const next = Object.keys(data).length;
-    data[next] = item;
+    const latitude = item.address.latitude;
+    const longitude = item.address.longitude;
+
+    data[latitude] = data[latitude] || {};
+    data[latitude][longitude] = data[latitude][longitude] || [];
+    data[latitude][longitude].push(item);
   },
 
   async getQuestion() {
@@ -50,3 +53,9 @@ module.exports = {
     return map;
   },
 };
+
+seed.forEach((item, index) => {
+  store.add(item);
+});
+
+module.exports = store;
