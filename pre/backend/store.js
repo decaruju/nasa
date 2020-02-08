@@ -18,4 +18,25 @@ module.exports = {
     const next = Object.keys(data).length;
     data[next] = item;
   }
+
+  async getQuestion() {
+    return [
+      {
+        id: 1,
+        text: 'premiere question',
+      },{
+        id: 2,
+        text: 'deuxieme question',
+      },{
+        id: 3,
+        text: 'troisieme question',
+      },{
+        id: 4,
+        text: 'quatrieme question',
+      },{
+        id: 5,
+        text: 'cinquieme question',
+      },
+    ];
+  }
 };

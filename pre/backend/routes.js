@@ -3,26 +3,8 @@ const store = require('./store.js');
 
 module.exports = (app) => {
   app.get('/questions', (req, res) => {
-    res.send(
-      [
-        {
-          id: 1,
-          text: 'premiere question',
-        },{
-          id: 2,
-          text: 'deuxieme question',
-        },{
-          id: 3,
-          text: 'troisieme question',
-        },{
-          id: 4,
-          text: 'quatrieme question',
-        },{
-          id: 5,
-          text: 'cinquieme question',
-        },
-      ]
-    );
+    const questions = await store.getQuestion();
+    res.send(questions);
   });
 
   app.post('/address', (req, res) => {
