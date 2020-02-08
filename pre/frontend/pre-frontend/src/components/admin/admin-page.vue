@@ -16,27 +16,30 @@
             >
             </GmapMarker>
         </GmapMap>
-        <template v-if="currentAddress">
-            <div v-for="(answer, index) in currentAddress.answers" :key="index">
-                {{ answer }}
-            </div>
-            <button @click="currentAddress = undefined">
-                Ignorer
-            </button>
-        </template>
+        Entrez votre addresse.
+
+        <gmap-autocomplete
+          @place_changed="placeChanged">
+        </gmap-autocomplete>
+
+        <question-form v-if="address" v-model="form" :questions="questions" />
     </div>
 </template>
 
 <script>
  import axios from 'axios';
+ import QuestionForm from '../question/question-form';
+
  export default {
      name: 'admin-page',
+     components: { QuestionForm },
      data() {
          return {
              data: [],
              center: { lat: 46.545304, lng: -72.750642 },
              addresses: [],
-             currentAddress: undefined,
+             address: undefined,
+             form: {},
          };
      },
      async created() {
@@ -45,11 +48,13 @@
          this.addresses = this.data.map((d) => d.address);
      },
      methods: {
-         onClick(index) {
-             this.currentAddress = this.data[index];
-             this.center = { lat: this.currentAddress.address.latitude, lng: this.currentAddress.address.longitude };
-         }
-     }
+        async placeChanged(address) {
+            this.address = undefined;
+            const response = await axios.get('http://localhost:8081/questions');
+            this.address = address;
+            this.questions = response.data;
+        },
+     },
  };
 </script>
 

@@ -1,4 +1,4 @@
-const pascal = require('./pascal.js');
+const floodingArea = require('./flooding_area.js');
 const store = require('./store.js');
 
 module.exports = (app) => {
@@ -7,11 +7,16 @@ module.exports = (app) => {
     res.send(questions);
   });
 
-  app.post('/address', (req, res) => {
+  app.post('/address', async(req, res) => {
     req.session.address = req.body.address;
 
-    res.send({ flood: pascal.isFlood(req.body.address) });
+    res.send({ isFlooded: await floodingArea.addressInRisk(req.body.address) });
   });
+
+  app.get('/flooding_risk', async(req, res) => {
+    res.send({ maps: await floodingArea.all() });
+  });
+
 
   app.post('/answers', (req, res) => {
     store.add({ answers: req.body.answers, address: req.session.address });

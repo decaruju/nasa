@@ -1,6 +1,5 @@
 <template>
     <div class="address-input">
-        <div class="input-container">
         <vue-google-autocomplete
             id="map"
             classname="form-control"
@@ -9,39 +8,22 @@
             placeholder=""
             required
         />
+
+        <div class="input-container">
+        <gmap-autocomplete
+          classname="form-control"
+          @place_changed="placeChanged"/>
         <div class="placeholder">
             Entrez votre adresse
         </div>
         </div>
-
         <div class="address-info" v-if="address">
             <h1>
                 Vos informations :
             </h1>
 
             <div>
-                <span class="field-name">
-                    Ville :
-                </span>
-                {{ address.locality }}
-            </div>
-            <div>
-                <span class="field-name">
-                    Province:
-                </span>
-                {{ address.administrative_area_level_1 }}
-            </div>
-            <div>
-                <span class="field-name">
-                Addresse:
-                </span>
-                {{ address.street_number }} {{ address.route }}
-            </div>
-            <div>
-                <span class="field-name">
-                Code postal:
-                </span>
-                {{ address.postal_code }}
+                {{ address.formatted_address }}
             </div>
         </div>
         <div v-if="address" class="button-container">
@@ -53,12 +35,10 @@
 </template>
 
 <script>
- import VueGoogleAutocomplete from 'vue-google-autocomplete';
  import axios from 'axios';
 
  export default {
      name: 'address-input',
-    components: { VueGoogleAutocomplete },
      data() {
          return {
              address: undefined,
