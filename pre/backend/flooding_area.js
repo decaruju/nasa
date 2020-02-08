@@ -6,12 +6,12 @@ const store = require('./store');
 // });
 
 module.exports = {
-
   async addressInRisk({ latitude, longitude }) {    
     const map = await store.getMap();
 
     return inside.feature(map, [longitude, latitude]);
   },
+  
   all() {
     return store.getMap();
   }
