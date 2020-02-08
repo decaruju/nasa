@@ -6,8 +6,8 @@
         map-type-id="terrain"
         style="width: 500px; height: 300px"
     >
-    <template v-if="paths">
-        <GmapPolygon  v-for="(path, index) in paths" :key="index" :paths="path" />
+    <template v-if="regions">
+        <GmapPolygon  v-for="(path, index) in regions" :key="index" :paths="path" />
     </template>
 
     </GmapMap>
@@ -59,13 +59,9 @@ import AddressInput from './address-input.vue';
 
      async created() {
         
-         const response = await axios.get('http://localhost:8081/flooding_risk_by_region/shawinigan'); 
+         const response = await axios.get('http://localhost:8081/flooding_risk/shawinigan'); 
          console.log("passe ici");
-         this.paths = response.data.maps[0]['geometry']['coordinates'].map((e) => {
-             return e[0].map((geo) => {
-                return { lng: geo[0], lat: geo[1] };
-             })
-         });
+         this.regions = response.data.maps;
 
          console.log('this.paths::', this.paths);
          

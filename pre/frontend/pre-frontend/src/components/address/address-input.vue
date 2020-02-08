@@ -5,8 +5,7 @@
             classname="form-control"
             @placechanged="placeChanged"
             country="ca"
-            placeholder=""
-            required
+            placeholder="Start Typing"
         />
     </div>
 </template>

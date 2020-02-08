@@ -13,11 +13,8 @@ module.exports = (app) => {
     res.send({ inRisk: await floodingArea.addressInRisk(req.body.address) });
   });
 
-  app.get('/flooding_risk', async(req, res) => {
-    res.send({ maps: await floodingArea.all() });
-  });
-
-  app.get('/flooding_risk_by_region/:region', async(req, res) => {
+  app.get('/flooding_risk/:region?', async(req, res) => {
+  
     res.send({ maps: await floodingArea.region(req.params.region) });
   });
 
