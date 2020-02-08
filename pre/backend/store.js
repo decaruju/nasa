@@ -17,7 +17,7 @@ module.exports = {
   async add(item) {
     const next = Object.keys(data).length;
     data[next] = item;
-  }
+  },
 
   async getQuestion() {
     return [
@@ -38,5 +38,5 @@ module.exports = {
         text: 'cinquieme question',
       },
     ];
-  }
+  },
 };

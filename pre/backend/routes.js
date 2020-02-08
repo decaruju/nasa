@@ -2,7 +2,7 @@ const pascal = require('./pascal.js');
 const store = require('./store.js');
 
 module.exports = (app) => {
-  app.get('/questions', (req, res) => {
+  app.get('/questions', async (req, res) => {
     const questions = await store.getQuestion();
     res.send(questions);
   });
