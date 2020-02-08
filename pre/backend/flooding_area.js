@@ -15,6 +15,14 @@ module.exports = {
   async region(name) {
     const data = await store.getMap();
     
-    return Object.values(data["features"]).filter((e) => e['properties']['mrs_nm_mrc'] && e['properties']['mrs_nm_mrc'].toLocaleLowerCase() == name.toLocaleLowerCase());
+    return Object.values(data["features"])
+      .filter((e) => e['properties']['mrs_nm_mrc'] && e['properties']['mrs_nm_mrc'].toLocaleLowerCase() == name.toLocaleLowerCase())
+      .map((e) => {
+        return e['geometry']['coordinates'].map((e) => {
+             return e[0].map((geo) => {
+                return { lng: geo[0], lat: geo[1] };
+             })
+         })
+      })[0];
   }
 };
