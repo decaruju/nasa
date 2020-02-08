@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
 import AddressForm from './components/address/address-form.vue';
-import QuestionForm from './components/question/question-form.vue';
+import QuestionFormPage from './components/question/question-form-page.vue';
 import axios from 'axios';
 import ImageDisplay from './components/image/image-display.vue';
 import AdminPage from './components/admin/admin-page.vue';
@@ -24,7 +24,7 @@ Vue.use(VueGoogleMaps, {
 
 const routes = [
   { path: '/', component: AddressForm },
-    { path: '/question/:id', component: QuestionForm },
+    { path: '/question/:id', component: QuestionFormPage },
     { path: '/image/:id', component: ImageDisplay },
     { path: '/admin', component: AdminPage },
 ];

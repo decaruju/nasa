@@ -43,7 +43,7 @@
          this.addresses = this.data.map((d) => d.address);
      },
      methods: {
-        placeChanged(address) {
+        async placeChanged(address) {
             this.address = address;
         },
      },
