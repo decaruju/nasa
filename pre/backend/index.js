@@ -4,6 +4,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const session = require('express-session');
 
+import pascal from './pascal.js';
+
 const r = require('rethinkdb');
 
 const app = express();
@@ -52,7 +54,7 @@ app.post('/address', (req, res) => {
 
   req.session.address = req.body.address;
 
-  res.send({ id: next, flood: true });
+  res.send({ id: next, flood: pascal.isFlood(req.body.address) });
 });
 
 app.listen(8081);
