@@ -18,16 +18,19 @@ app.use(session({
   cookie: { secure: true }
 }));
 
-let conn = null;
-r.connect({ host: 'localhost', port: 28015 }, (err, connection) => {
-  if (err) throw err;
-  conn = connection;
-  conn.use('dev')
-});
+// let conn = null;
+// r.connect({ host: 'localhost', port: 28015 }, (err, connection) => {
+//   if (err) throw err;
+//   conn = connection;
+//   conn.use('dev')
+// });
 
-app.get('/questions', async(req, res) => {
-  const cursor = await r.table('questions').run(conn);
-  res.send(await cursor.toArray());
+app.get('/questions', (req, res) => {
+  res.send([{
+    id: 1,
+    text: 'premiere question'
+  }]);
+  res.send(res);
 });
 
 app.post('/address', (req, res) => {
