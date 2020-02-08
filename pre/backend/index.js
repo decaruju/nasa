@@ -25,7 +25,7 @@ app.use(session({
 //   conn.use('dev')
 // });
 
-const data = [];
+const data = {};
 
 app.get('/questions', (req, res) => {
   res.send([{
