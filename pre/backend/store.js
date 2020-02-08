@@ -8,6 +8,7 @@
 // });
 
 const data = {};
+const map = require('./geo.json');
 
 module.exports = {
   async fetchAll() {
@@ -38,5 +39,9 @@ module.exports = {
         text: 'cinquieme question',
       },
     ];
+  },
+
+  async getMap() {
+    return map;
   },
 };
