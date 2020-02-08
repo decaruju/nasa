@@ -15,6 +15,7 @@
     "express-session": "^1.17.0",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
+    "point-in-geopolygon": "^1.0.1",
     "rethinkdb": "^2.4.2"
   }
 }

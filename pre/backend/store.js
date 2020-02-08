@@ -9,6 +9,7 @@ const seed = require('./seed.js');
 // });
 
 const data = {};
+const map = require('./geo.json');
 
 seed.forEach((item, index) => {
   data[index] = item;
@@ -43,5 +44,9 @@ module.exports = {
         text: 'cinquieme question',
       },
     ];
+  },
+
+  async getMap() {
+    return map;
   },
 };
