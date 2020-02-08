@@ -25,18 +25,34 @@ app.use(session({
 //   conn.use('dev')
 // });
 
+const data = [];
+
 app.get('/questions', (req, res) => {
   res.send([{
     id: 1,
     text: 'premiere question',
-    test: req.session.address,
-  }]);
+  },{
+    id: 2,
+    text: 'deuxieme question',
+  },{
+    id: 3,
+    text: 'troisieme question',
+  },{
+    id: 4,
+    text: 'quatrieme question',
+  },{
+    id: 5,
+    text: 'cinquieme question',
+  }, ]);
 });
 
 app.post('/address', (req, res) => {
+  const next = Object.keys(data).length;
+  data[next] = req.body.address;
+
   req.session.address = req.body.address;
 
-  res.send({ flood: true });
+  res.send({ id: next, flood: true });
 });
 
 app.listen(8081);
