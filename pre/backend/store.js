@@ -1,3 +1,4 @@
+const seed = require('./seed.js');
 // const r = require('rethinkdb');
 
 // let conn = null;
@@ -8,6 +9,10 @@
 // });
 
 const data = {};
+
+seed.forEach((item, index) => {
+  data[index] = item;
+});
 
 module.exports = {
   async fetchAll() {
