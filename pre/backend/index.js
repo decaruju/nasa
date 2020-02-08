@@ -31,6 +31,8 @@ app.use(cors({
 //   conn.use('dev')
 // });
 
+const data = {};
+
 app.get('/questions', (req, res) => {
   res.send([{
     id: 1,
@@ -54,6 +56,10 @@ app.post('/address', (req, res) => {
   req.session.address = req.body.address;
 
   res.send({ flood: pascal.isFlood(req.body.address) });
+});
+
+app.post('/answers', (req, res) => {
+  res.send({ message: 'merci' });
 });
 
 app.listen(8081);

@@ -45,9 +45,9 @@
          placeChanged(address) {
              this.address = address;
          },
-         submit() {
-             axios.post('http://localhost:8081/address', {address: this.address});
-             this.$router.push('question')
+         async submit() {
+             const response = await axios.post('http://localhost:8081/address', { address: this.address });
+             this.$router.push(`question/${response.data.id}`)
          },
      },
  };
