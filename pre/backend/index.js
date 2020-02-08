@@ -19,7 +19,6 @@ app.use(session({
 
 app.use(cors({
     origin:['http://localhost:8080'],
-    methods:['GET','POST'],
     credentials: true // enable set cookie
 }));
 
@@ -51,7 +50,8 @@ app.post('/address', (req, res) => {
 });
 
 app.post('/answers', (req, res) => {
-    data[req.body.id].answers = req.body.answers;
+    const index = Object.keys(data).length;
+    data[index] = { answers: req.body.answers, address: req.session.address };
   res.send({ message: 'merci' });
 });
 
