@@ -31,7 +31,7 @@
      },
      methods:  {
          async send() {
-             await axios.post('http://localhost:8081/answers', { id: this.$route.params.id, answers: this.form });
+             await axios.post('http://localhost:8081/answers', { answers: this.form });
              this.$router.push(`/image/${this.$route.params.id}`)
          }
      }

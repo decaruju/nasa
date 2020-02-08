@@ -32,10 +32,21 @@
          placeChanged(address) {
              this.address = address;
          },
+
          async submit() {
-             const response = await axios.post('http://localhost:8081/address', { address: this.address });
-             this.$router.push(`question/${response.data.id}`)
+             const response = await axios.post(
+                'http://localhost:8081/address', 
+                { address: this.getPosition(this.address) }
+            );
+            this.$router.push(`question/${response.data.id}`)
          },
+
+         getPosition(address) {
+            return {
+                lng: address.geometry.location.lng(),
+                lat: address.geometry.location.lat(),
+            };
+        },
      },
  };
 </script>
