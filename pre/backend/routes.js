@@ -10,7 +10,13 @@ module.exports = (app) => {
   app.post('/address', async(req, res) => {
     req.session.address = req.body.address;
 
-    res.send({ isFlooded: await floodingArea.addressInRisk(req.body.address) });
+      const isFlooded = await floodingArea.addressInRisk(req.body.address);
+      const response = { isFlooded };
+      if (isFlooded === -1) {
+          response.floodability = floodingArea.floodability(req.body.address.geometry.location);
+      }
+
+      res.send(response);
   });
 
   app.get('/flooding_risk', async(req, res) => {
