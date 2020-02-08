@@ -48,12 +48,16 @@ app.get('/questions', (req, res) => {
 });
 
 app.post('/address', (req, res) => {
-  const next = Object.keys(data).length;
-  data[next] = req.body.address;
+    const next = Object.keys(data).length;
+    data[next] = req.body.address;
 
-  req.session.address = req.body.address;
+    req.session.address = req.body.address;
 
-  res.send({ id: next, flood: pascal.isFlood(req.body.address) });
+    res.send({ id: next, flood: pascal.isFlood(req.body.address) });
+});
+
+app.post('/question', (req, res) => {
+  res.send({ message: 'merci' });
 });
 
 app.listen(8081);

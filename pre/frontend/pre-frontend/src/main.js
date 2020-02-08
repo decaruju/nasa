@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 
 const routes = [
   { path: '/', component: AddressForm },
-    { path: '/question', component: QuestionForm },
+    { path: '/question/:id', component: QuestionForm },
 ];
 
 const router = new VueRouter({

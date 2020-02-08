@@ -1,13 +1,18 @@
 <template>
     <div>
-        <label v-for="question in questions" :key="question.id">
-            <div>
-                {{ question.text }}
-            </div>
-            <input type="text" v-model="form[question.id]">
-        </label>
-      {{ form }}
-      {{ questions }}
+        <div>
+            <label v-for="question in questions" :key="question.id">
+                <div>
+                    {{ question.text }}
+                </div>
+                <input type="text" v-model="form[question.id]">
+            </label>
+        </div>
+        <div>
+            <button @click="send">
+                Envoyer les informations supplémentaires.
+            </button>
+        </div>
     </div>
 </template>
 
@@ -28,7 +33,7 @@
      },
      methods:  {
          send() {
-             axios.post('http://localhost:8081/answers', { answers: this.form });
+             axios.post('http://localhost:8081/answers', { id: this.$route.params.id, answers: this.form });
          }
      }
  }
