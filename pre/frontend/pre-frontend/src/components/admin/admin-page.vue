@@ -13,18 +13,27 @@
             >
             </GmapMarker>
         </GmapMap>
-        poopoo
+        Entrez votre addresse.
+        <vue-google-autocomplete
+            id="map"
+            classname="form-control"
+            @placechanged="placeChanged"
+            country="ca"
+        />
     </div>
 </template>
 
 <script>
+ import VueGoogleAutocomplete from 'vue-google-autocomplete';
  import axios from 'axios';
  export default {
      name: 'admin-page',
+     components: { VueGoogleAutocomplete },
      data() {
          return {
              data: [],
-             addresses: []
+             addresses: [],
+             address: undefined,
          };
      },
      async created() {
@@ -32,7 +41,12 @@
          console.log(response)
          this.data = response.data;
          this.addresses = this.data.map((d) => d.address);
-     }
+     },
+     methods: {
+        placeChanged(address) {
+            this.address = address;
+        },
+     },
  };
 </script>
 
