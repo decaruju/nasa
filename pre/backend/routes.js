@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.post('/address', async(req, res) => {
     req.session.address = req.body.address;
 
-    res.send({ flood: await floodingArea.addressInRisk(req.body.address) });
+    res.send({ isFlooded: await floodingArea.addressInRisk(req.body.address) });
   });
 
   app.get('/flooding_risk', async(req, res) => {
