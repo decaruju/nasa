@@ -1,13 +1,7 @@
 <template>
     <div>
-        <div>
-            <label v-for="question in questions" :key="question.id">
-                <div>
-                    {{ question.text }}
-                </div>
-                <input type="text" v-model="form[question.id]">
-            </label>
-        </div>
+        <question-form v-model="form" :questions="questions" />
+
         <div>
             <button @click="send">
                 Envoyer les informations supplémentaires.
@@ -18,9 +12,13 @@
 
 <script>
  import axios from 'axios';
+ import questionForm from './question-form';
 
  export default {
-     name: 'question-form',
+     name: 'question-form-page',
+     components: {
+        questionForm,
+     },
      data() {
          return {
              form: {},
