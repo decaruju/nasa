@@ -4,8 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const session = require('express-session');
 const pascal = require('./pascal.js');
-
-const r = require('rethinkdb');
+const store = require('./store.js');
 
 const app = express();
 app.use(morgan('combined'));
@@ -24,32 +23,25 @@ app.use(cors({
     credentials: true // enable set cookie
 }));
 
-// let conn = null;
-// r.connect({ host: 'localhost', port: 28015 }, (err, connection) => {
-//   if (err) throw err;
-//   conn = connection;
-//   conn.use('dev')
-// });
-
-const data = {};
-
 app.get('/questions', (req, res) => {
-  res.send([{
-    id: 1,
-    text: 'premiere question',
-  },{
-    id: 2,
-    text: 'deuxieme question',
-  },{
-    id: 3,
-    text: 'troisieme question',
-  },{
-    id: 4,
-    text: 'quatrieme question',
-  },{
-    id: 5,
-    text: 'cinquieme question',
-  }, ]);
+  res.send([
+    {
+      id: 1,
+      text: 'premiere question',
+    },{
+      id: 2,
+      text: 'deuxieme question',
+    },{
+      id: 3,
+      text: 'troisieme question',
+    },{
+      id: 4,
+      text: 'quatrieme question',
+    },{
+      id: 5,
+      text: 'cinquieme question',
+    },
+  ]);
 });
 
 app.post('/address', (req, res) => {
