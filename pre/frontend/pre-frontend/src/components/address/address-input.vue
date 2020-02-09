@@ -1,11 +1,9 @@
 <template>
-    <div class="address-input">
-        <gmap-autocomplete
-            @place_changed="placeChanged"
-            placeholder="Entrer votre adresse"
-        >
-        </gmap-autocomplete>
-    </div>
+    <gmap-autocomplete
+        @place_changed="placeChanged"
+        placeholder=""
+      required
+    />
 </template>
 
 <script>

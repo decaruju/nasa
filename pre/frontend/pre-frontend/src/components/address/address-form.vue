@@ -16,9 +16,15 @@
 
     </GmapMap>
 
-        Entrez votre addresse.
 
-        <address-input @input="onInput" />
+        <div class="input-container">
+            <div class="input-with-placeholder">
+                <address-input @input="onInput" />
+                <div class="placeholder">
+                    Entrez votre addresse.
+                </div>
+            </div>
+        </div>
 
         <div class="address-info" v-if="address">
             <div>
