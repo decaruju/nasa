@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="margin: 20px;">
     <question-form v-model="form" :questions="questions" />
 
-    <div>
+    <div style="margin-top: 20px;">
       <button @click="send" class="mdl-button mdl-button--raise mdl-button--colored">
           Envoyer les informations supplémentaires.
       </button>

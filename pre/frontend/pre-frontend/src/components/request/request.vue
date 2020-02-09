@@ -1,5 +1,8 @@
 <template>
-    <div class="requests">
+    <div class="requests" style="margin: 20px;">
+      <div class="banner-risk in-risk">
+        Si vous êtes en situation d'urgence, veuillez contacter le 9-1-1
+      </div>
       <div v-if="address">
         <div>
           <div v-for="question in questions" :key="question.id">

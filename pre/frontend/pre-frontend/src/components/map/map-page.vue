@@ -14,7 +14,7 @@
             />
         </GmapMap>
 
-        <div>
+        <div style="margin: 20px;">
             <h2>Requêtes</h2>
             <div class="demo-card-image mdl-card mdl-shadow--2dp" v-for="(request, idx) in requests" :key="idx">
                 <div class="mdl-card__title mdl-card--expand">

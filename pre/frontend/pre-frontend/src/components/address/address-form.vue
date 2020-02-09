@@ -5,30 +5,26 @@
       :zoom="16"
       map-type-id="terrain"
     >
-      <template v-if="regions">
-          <GmapPolygon v-for="(path, index) in regions" :key="index" :paths="path" />
-      </template>
+    <template v-if="regions">
+        <GmapPolygon v-for="(path, index) in regions" :key="index" :paths="path" />
+    </template>
 
-      <GmapMarker
-        v-if="address"
-        :position="center"
-      />
-
-      <GmapPolyline
-        :path="[center, closest]"
-      />
+    <GmapMarker
+    v-if="address"
+    :position="center"
+    />
+      <GmapPolyline :path="[center, closest]" />
     </GmapMap>
 
-    <h2>Suis-je à risque?</h2>
-    <address-input @input="onInput" />
-
-        <div class="address-info" v-if="address">
+    <div style="margin: 20px;">
+      <address-input @input="onInput" />
+      <div class="address-info" v-if="address">
             <div>
                 address : {{ address.formatted_address }}
             </div>
         </div>
 
-        <div v-if="inRisk !== undefined">
+        <div v-if="inRisk !== undefined" class="banner-risk" :class="{ 'in-risk': inRisk, 'not-in-risk': !inRisk }">
             {{inRisk ? 'Vous êtes à risque' : "vous n'êtes pas à risque"}}
         </div>
         <div>
@@ -38,7 +34,8 @@
                 S'inscrire
             </button>
         </div>
-    </div>
+    </div>      
+  </div>
 </template>
 
 <script>

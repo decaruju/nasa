@@ -4,27 +4,35 @@
     :center="center"
     :zoom="16"
     map-type-id="terrain"
-    style="width: 500px; height: 300px"
 >
+
 <GmapMarker
     v-for="(address, index) in addresses"
     :key="index"
+    @click="placeChanged({
+        geometry: {
+            location: { lat: () => address.lat, lng: () => address.lng },
+        }
+    })"
     :position="{ lat: address.lat, lng: address.lng }"
     :clickable="true"
     title="foobar"
 >
 </GmapMarker>
+
 </GmapMap>
 
-<address-input @input="placeChanged" />
+<div style="margin: 20px;">
+    <address-input @input="placeChanged" />
 
-<question-form v-if="address" v-model="form" :questions="questions" />
+    <question-form v-if="address" v-model="form" :questions="questions" />
 
-<div>
-    <button @click="send">
+    <div>
+    <button @click="send" class="mdl-button mdl-button--raise mdl-button--colored" style="margin-top: 20px;">
         Envoyer les informations supplémentaires.
     </button>
-</div>
+    </div>
+    </div>
 </div>
 </template>
 
@@ -54,6 +62,8 @@
      },
      methods: {
         async placeChanged(address) {
+            console.log('passe ici', address);
+            
             const response = await axios.get('http://localhost:8081/questions');
             const answers = await axios.get('http://localhost:8081/answers', {
                 params: this.getPosition(address),

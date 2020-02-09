@@ -82,7 +82,7 @@ export default {
   computed: {
     filteredHeader() {
       return this.headers.filter((header) => {
-        return (!header.flood || (header.flood && this.flood)) 
+        return (!header.flood || (header.flood && this.flood && !this.admin)) 
           && (!header.admin || (header.admin && this.admin));
       });
     },
@@ -110,6 +110,21 @@ $color-before3: #c6ccde;
 $color-before4: #e5e9f0;
 
 
+.banner-risk {
+  font-size: 20px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+
+.in-risk {
+  background-color: $color-during3;
+}
+
+.not-in-risk {
+  background-color: $color-before3;
+}
+
   .mdl-layout__tab.is-active::after {
     height: 2px;
     width: 100%;
@@ -125,6 +140,15 @@ $color-before4: #e5e9f0;
   }
   
   .app-during {
+    h1, h2, h3, h3, h4, h5, .placeholder {
+      color: $color-during4;
+    }
+
+    .mdl-button--colored {
+      background: $color-during1;
+      color: $color-during4;
+    }
+
     .mdl-layout__tab {
       color: $color-during4;
     }
@@ -139,6 +163,15 @@ $color-before4: #e5e9f0;
   }
 
   .app-before {
+    h1, h2, h3, h3, h4, h5, .placeholder {
+      color: $color-before1;
+    }
+
+    .mdl-button--colored {
+      background: $color-before1;
+      color: $color-before4;
+    }
+
     .mdl-layout__tab {
       color: $color-before4;
     }

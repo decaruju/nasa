@@ -1,7 +1,10 @@
 <template>
     <div class="image">
-        Merci pour votre input.
-    <qr-code :value="value" :options="{ scale: 20 }" error-correction-level="high" :scale="20" />
+        <div>
+            Veuillez imprimer ce code QR
+        </div>
+
+        <qr-code :value="value" :options="{ scale: 20 }" error-correction-level="high" :scale="20" />
     </div>
 </template>
 
@@ -23,8 +26,11 @@
 
 <style lang="scss">
  .image {
+    margin: 20px;
+    text-align: center;
+
      img {
-         width: 100%;
+        height: 50%;
      }
  }
 </style>
