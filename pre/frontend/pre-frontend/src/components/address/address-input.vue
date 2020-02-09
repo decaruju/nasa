@@ -2,7 +2,7 @@
     <div class="address-input">
         <gmap-autocomplete
             @place_changed="placeChanged"
-            placeholder="Entrer votre adresse"
+            placeholder=""
         >
         </gmap-autocomplete>
     </div>
@@ -24,15 +24,3 @@
      },
  };
 </script>
-
-<style lang="scss">
- .address-input {
-
- }
-
- #map {
-     width: 100%;
-     margin: 0 auto;
- }
-
-</style>
