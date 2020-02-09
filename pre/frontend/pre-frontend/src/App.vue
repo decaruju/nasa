@@ -51,7 +51,7 @@ export default {
 
      .input-container {
          width: 100%;
-         padding: 10%;
+         padding: 10% 10% 0 10%;
          box-sizing: border-box;
      }
 
@@ -64,7 +64,6 @@ export default {
          width: 100%;
          padding: 20px;
          border-radius: 5px;
-         margin-bottom: 40px;
          border: none;
          border-bottom: 4px solid #2E4478;
          box-shadow: 2px 2px 5px 5px #A0AECE;
@@ -121,5 +120,9 @@ html {
  .vue-map-container {
      width: 100%;
      height: 500px;
+ }
+ .input-container {
+     box-sizing: border-box;
+     height: 100%;
  }
 </style>
