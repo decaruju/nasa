@@ -1,9 +1,9 @@
 import FormInput from '../form/input.vue';
-import FormCheckbox from '../form/checkbox.vue';
+import FormRadio from '../form/radio.vue';
 
 const components = {
   text: FormInput,
-  checkbox: FormCheckbox,
+  radio: FormRadio,
 };
 
 export default {

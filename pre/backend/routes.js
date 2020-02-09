@@ -18,7 +18,7 @@ module.exports = (app) => {
         {
           id: 1,
           text: 'Voulez-vous vous inscrire à la distribution de denrées?',
-          type: 'checkbox',
+          type: 'radio',
           posibility: [
             {
               value: 1,

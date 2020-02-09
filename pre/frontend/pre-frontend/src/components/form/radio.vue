@@ -1,5 +1,5 @@
 <template>
-  <div class="input-container checkbox">
+  <div class="input-container radio">
     <div class="placeholder">
       {{ question.text }}
     </div>
@@ -20,7 +20,7 @@
 
 <script>
  export default {
-     name: 'form-checkbox',
+     name: 'form-radio',
      data() {
          return {
             checked: undefined,
