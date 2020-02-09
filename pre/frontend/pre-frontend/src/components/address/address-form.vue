@@ -1,7 +1,7 @@
 <template>
     <div>
      <GmapMap
-        :center="{ lat: 46.545304, lng: -72.750642 }"
+        :center="center"
         :zoom="16"
         map-type-id="terrain"
         style="width: 500px; height: 300px"
@@ -9,6 +9,11 @@
     <template v-if="regions">
         <GmapPolygon  v-for="(path, index) in regions" :key="index" :paths="path" />
     </template>
+
+    <GmapMarker
+        v-if="address"
+        :position="center"
+    />
 
     </GmapMap>
 
@@ -18,16 +23,7 @@
 
         <div class="address-info" v-if="address">
             <div>
-                Ville : {{ address.locality }}
-            </div>
-            <div>
-                Province: {{ address.administrative_area_level_1 }}
-            </div>
-            <div>
-                Addresse: {{ address.street_number }} {{ address.route }}
-            </div>
-            <div>
-                Code postal: {{ address.postal_code }}
+                address : {{ address.formatted_address }}
             </div>
         </div>
 
@@ -51,6 +47,7 @@ import AddressInput from './address-input.vue';
 
      data() {
          return {
+            center: { lat: 46.545304, lng: -72.750642 },
             address: undefined,
             inRisk: undefined,
             regions: undefined,
@@ -72,8 +69,13 @@ import AddressInput from './address-input.vue';
      },
 
      methods: {
-         onInput(address) {             
+         onInput(address) {  
+             console.log('address::', address);
+                        
              this.address = address;
+             this.center = { 
+                 lat: this.address.geometry.location.lat(), 
+                 lng: this.address.geometry.location.lng() };
          },
 
          async submit() {
