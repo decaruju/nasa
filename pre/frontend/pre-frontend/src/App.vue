@@ -4,7 +4,7 @@
           <router-view />
       </div>
       <div class="topbar">
-          instacript
+          <img src="../public/logo.png" width="50px"/>
       </div>
   </div>
 </template>
