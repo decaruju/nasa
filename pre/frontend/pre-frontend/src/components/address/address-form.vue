@@ -54,6 +54,7 @@ import AddressInput from './address-input.vue';
             address: undefined,
             inRisk: undefined,
             paths: undefined,
+    regions: undefined,
          };
      },
 

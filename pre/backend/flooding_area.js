@@ -13,10 +13,9 @@ module.exports = {
     return store.getMap();
   },
 
-  async floodability(coords) {
-      console.log(coords)
+    async floodability({ latitude, longitude }) {
       const points = await allPoints();
-      const distances = points.map((point) => getDistanceFromLatLonInKm(coords.lat, coords.lng, point[1], point[0]));
+      const distances = points.map((point) => getDistanceFromLatLonInKm(latitude, longitude, point[1], point[0]));
       return Math.min(...distances);
   },
 
