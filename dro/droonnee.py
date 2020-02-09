@@ -1,20 +1,11 @@
 print("Start simulator (SITL)")
 import time
 import dronekit_sitl
-sitl = dronekit_sitl.start_default(lat=46.54542, lon=-72.74997)
-connection_string = sitl.connection_string()
 
 # Import DroneKit-Python
 from dronekit import connect, VehicleMode, LocationGlobal
 
-# Connect to the Vehicle.
-print("Connecting to vehicle on: %s" % (connection_string,))
-vehicle = connect(connection_string, wait_ready=True)
-
-def location_callback(self, attr_name, value):
-     print("Location (Global): ", value)
-
-def arm_and_takeoff(aTargetAltitude):
+def arm_and_takeoff(vehicle, aTargetAltitude):
     """
     Arms vehicle and fly to aTargetAltitude.
     """
@@ -49,13 +40,18 @@ def arm_and_takeoff(aTargetAltitude):
         time.sleep(1)
 
 
-vehicle.add_attribute_listener('location.global_frame', location_callback)
+def doit(callback):
+     sitl = dronekit_sitl.start_default(lat=46.53443, lon=-72.75409)
+     connection_string = sitl.connection_string()
+     vehicle = connect(connection_string, wait_ready=True)
 
-arm_and_takeoff(30)
+     vehicle.add_attribute_listener('location.global_frame', callback)
+
+     arm_and_takeoff(vehicle, 30)
 
 
-loc = LocationGlobal(46.53443, -72.75409, 30)
-vehicle.simple_goto(loc)
+     loc = LocationGlobal(46.54542, -72.74997, 30)
+     vehicle.simple_goto(loc, airspeed=5, groundspeed=5)
 ## Close vehicle object before exiting script
 #vehicle.close()
 #
