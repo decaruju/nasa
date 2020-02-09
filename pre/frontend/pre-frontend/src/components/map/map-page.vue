@@ -16,9 +16,9 @@
 
         <div style="margin: 20px;">
             <h2>Requêtes</h2>
-            <div class="demo-card-image mdl-card mdl-shadow--2dp" v-for="(request, idx) in requests" :key="idx">
+            <div class="demo-card-image mdl-card mdl-shadow--2dp" v-for="(request, idx) in requests" :key="idx" style="overflow: auto;">
                 <div class="mdl-card__title mdl-card--expand">
-                    {{ request }}
+                    <pre>{{ request }}</pre>
                 </div>
                 <div class="mdl-card__actions">
                    <button @click="start" class="mdl-button mdl-button--raise mdl-button--colored">
@@ -45,7 +45,12 @@ import axios from 'axios';
 
     async created() {
         const response = await axios.get('http://localhost:8081/requests');
-         this.requests = response.data.payload;
+        const payload = response.data.payload;
+         this.requests = Object.keys(payload).map((key) => {
+             console.log(payload[key], JSON.stringify(payload[key], undefined, 2));
+             
+             return JSON.stringify(payload[key], null, 2);
+         });
     },
 
      computed: {

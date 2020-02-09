@@ -59,12 +59,12 @@ const store = {
         requests = [...requests, ...data[lat][lng].requests.map((obj) => { 
           ids = Object.keys(obj);
           return ids.reduce((acc, id) => { 
-            acc[id] = {
+            acc.push({
               response: obj[id],
-              answer: req[id]
-            };
+              question: req[id]
+            });
             return acc;
-           }, {});
+           }, []);
         })];
       });
     });
