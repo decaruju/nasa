@@ -1,153 +1,129 @@
 <template>
-  <div class="app-container" :class="{before:!flood, during:flood}">
-      <div class="app">
-          <router-view />
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">
+            <img v-if="flood" @click="flood = !flood" src="../public/logo_pendant.png" width="50px"/>
+            <img v-else @click="flood = !flood" src="../public/logo_avant.png" width="50px"/>
+          </span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a v-for="(header, index) in headers" :key="index" :href="'/#'+header.link" class="mdl-layout__tab" @click="active=index" :class="{ 'is-active': index==active }">{{ header.text }}</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
       </div>
-      <div class="topbar">
-          <img v-if="flood" @click="flood = !flood" src="../public/logo_pendant.png" width="50px"/>
-          <img v-else @click="flood = !flood" src="../public/logo_avant.png" width="50px"/>
-      </div>
+      <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+          <div class="page-content">
+            <div class="app">
+              <router-view />
+            </div>
+          </div>
+        </section>
+      </main>
+
   </div>
 </template>
 
 <script>
 export default {
   name: 'App',
-     data() {
-         return {
-             flood: false,
-         }
-     },
+
+  components: {
+  },
+  data() {
+      return {
+        flood: false,
+        active: 0,
+        headers: [
+          {
+            link: '/',
+            text: 'Suis-je à risque'
+          },
+          {
+            link: '/request',
+            text: `J'ai besoin d'aide`,
+          },
+        ]
+      }
+  },
 }
 </script>
 
 <style lang="scss">
+    .mdl-layout__header, .mdl-layout__tab-bar {
+      background-color: #A0AECE;
+    }
 
     .mdl-textfield__label {
         color: #2E4478;
     }
 
- * {
-     outline: none;
- }
-  html, body, .app-container, .app {
-      height: 100%;
-      background-color: #FAFAFF;
-      padding: 0;
+    .vue-map-container {
+      width: 100%;
+      height: 300px;
+    }
+
+    .mdl-button {
+      background-color: #A0AECE;
+    }
+
+    .textfield {
+      position: relative;
+      font-size: 16px;
+      display: inline-block;
+      box-sizing: border-box;
+      width: 300px;
+      max-width: 100%;
       margin: 0;
-      color: #2E4478;
+      padding: 20px 0;
 
-      .topbar {
-          width: 100%;
-          padding: 20px;
-          background-color: #A0AECE;
-          box-sizing: border-box;
-          box-shadow: 5px 0 10px 4px;
-          position: absolute;
-          top: 0;
+    }
 
-          img {
-            -webkit-user-drag: none;
-            -khtml-user-drag: none;
-            -moz-user-drag: none;
-            -o-user-drag: none;
-            user-drag: none;
+    .input {
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,.12);
+        display: block;
+        font-size: 16px;
+        font-family: "Helvetica","Arial",sans-serif;
+        margin: 0;
+        padding: 4px 0;
+        width: 100%;
+        background: 0 0;
+        text-align: left;
+        color: inherit;
+
+        &:focus {
+            outline: none;
         }
-      }
-  }
-.app-container {
-    margin-top: 5%;
-}
- html body {
-     .app {
-         background-color: #D0D8E9;
-         width: 80%;
-         margin: 0 auto;
-     }
 
-     .input-container {
-         position: relative;
-     }
+        + .placeholder, +.label {
+            position: absolute;
+            top: 24px;
+            left: 10px;
+            font-size: 16px;
 
-     .input-container {
-         width: 100%;
-         padding: 10% 10% 0 10%;
-         box-sizing: border-box;
-     }
+            transition-duration: .2s;
+            transition-timing-function: cubic-bezier(.4,0,.2,1);
+            //  transition: all 0.2s ease-in-out;
+        }
 
-     .input-with-placeholder {
-         position: relative;
-     }
-     
-    //  input {
-    //     box-sizing: border-box;
-    //     width: 100%;
-    //     padding: 20px;
-    //     border-radius: 5px;
-    //     border: none;
-    //     border-bottom: 4px solid #2E4478;
-    //     box-shadow: 2px 2px 5px 5px #A0AECE;
-    //     background-color: #FAFAFF;
-    //     font-size: 24px;
+        &:focus, &:valid {
+          + .placeholder, +.label {
+              font-size: 12px;
+              top: 2px;
+          }
+        }
 
-    //     + .placeholder {
-    //         position: absolute;
-    //         top: 32px;
-    //         left: 10px;
-    //         font-size: 32px;
-    //         transition: all 0.2s ease-in-out;
-    //     }
+    }
 
-    //     &:focus, &:valid {
-    //         + .placeholder {
-    //             font-size: 20px;
-    //             top: -30px;
-    //         }
-    //     }
+    .placeholder {
+      color: #2E4478;
+      font-size: 16px;
+    }
 
-    //     &[type="checkbox"], &[type="radio"] {
-    //         box-shadow: none;
-    //         width: 20px;
-    //     }
-    //  }
-
-     .address-info {
-         .field-name {
-             font-weight: bold;
-             font-size: 24px;
-         }
-     }
-
- }
-html {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin-top: 60px;
-}
- .button-container {
-     width: 100%;
-     padding: 20%;
-     box-sizing: border-box;
-
-     button {
-         background-color: #A0AECE;
-         box-shadow: 4px 4px 10px 4px #2E4478;
-         width: 100%;
-         border: none;
-         padding: 10%;
-         font-size: 24px;
-         text-transform: uppercase;
-         border-radius: 2px;
-     }
- }
-
- .vue-map-container {
-     width: 100%;
-     height: 500px;
- }
- .input-container {
-     box-sizing: border-box;
-     height: 100%;
- }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" type="text" @input="onInput" :id="question.id">
-      <label class="mdl-textfield__label" :for="question.id">{{ question.text }}</label>
+    <div class="textfield">
+      <input class="input" type="text" @input="onInput" :id="question.id">
+      <label class="placeholder" :for="question.id">{{ question.text }}</label>
     </div>
   </div>
 </template>

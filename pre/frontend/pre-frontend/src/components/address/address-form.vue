@@ -1,24 +1,26 @@
 <template>
-    <div>
-     <GmapMap
-        :center="center"
-        :zoom="16"
-        map-type-id="terrain"
+  <div>
+    <GmapMap
+      :center="center"
+      :zoom="16"
+      map-type-id="terrain"
     >
-    <template v-if="regions">
-        <GmapPolygon v-for="(path, index) in regions" :key="index" :paths="path" />
-    </template>
+      <template v-if="regions">
+          <GmapPolygon v-for="(path, index) in regions" :key="index" :paths="path" />
+      </template>
 
-    <GmapMarker
+      <GmapMarker
         v-if="address"
         :position="center"
-    />
-    <GmapPolyline
-        :path="[center, closest]"
-    />
+      />
 
+      <GmapPolyline
+        :path="[center, closest]"
+      />
     </GmapMap>
-        <address-input @input="onInput" />
+
+    <h2>Suis-je à risque?</h2>
+    <address-input @input="onInput" />
 
         <div class="address-info" v-if="address">
             <div>
@@ -29,8 +31,8 @@
         <div v-if="inRisk !== undefined">
             {{inRisk ? 'Vous êtes à risque' : "vous n'êtes pas à risque"}}
         </div>
-        <div v-if="address" class="button-container">
-            <button @click="submit">
+        <div v-if="address" >
+            <button @click="submit" class="mdl-button mdl-button--raise mdl-button--colored">
                 S'inscrire
             </button>
         </div>
