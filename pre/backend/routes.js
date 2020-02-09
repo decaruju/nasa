@@ -26,12 +26,26 @@ module.exports = (app) => {
 
 
   app.post('/answers', (req, res) => {
-    store.add({ answers: req.body.answers, address: req.session.address });
+    let address = req.session.address;
+    
+    if (req.body.lng) address.lng = req.body.lng;
+    if (req.body.lat) address.lat = req.body.lat;
+
+    store.add({ answer: req.body.answers, ...address });
     res.send({ message: 'merci' });
   });
 
+  app.get('/answers', async (req, res) => {
+    const answers = await store.getAnswers({
+      lng: req.query.lng,
+      lat: req.query.lat,
+    });
+
+    res.send(answers);
+  });
+
   app.get('/admin', async (req, res) => {
-    const data = await store.fetchAll();
+    const data = await store.fetchAllDots();
     res.send(data);
   });
 };

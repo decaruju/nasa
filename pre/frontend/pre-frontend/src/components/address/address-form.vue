@@ -72,17 +72,27 @@ import AddressInput from './address-input.vue';
      },
 
      methods: {
-         onInput(address) {
-             console.log('onInput');
-             
+         onInput(address) {             
              this.address = address;
          },
+
          async submit() {
-             const response = await axios.post('http://localhost:8081/in_risk', { address: this.address });
+             const response = await axios.post(
+                'http://localhost:8081/in_risk', 
+                { address: this.getPosition(this.address) }
+            );
 
              this.inRisk = response.data.inRisk;
              //this.$router.push(`question/${response.data.id}`)
          },
-     }
+
+         getPosition(address) {
+            console.log(address);
+            return {
+                lng: address.geometry.location.lng(),
+                lat: address.geometry.location.lat(),
+            };
+        },
+     },
  }
 </script>
