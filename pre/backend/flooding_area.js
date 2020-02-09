@@ -15,8 +15,8 @@ module.exports = {
 
     async floodability({ lat, lng }) {
       const points = await allPoints();
-      const distances = points.map((point) => getDistanceFromLatLonInKm(lat, lng, point[1], point[0]));
-        return Math.min(...distances.filter((distance) => !!distance));
+        const distances = points.map((point) => ({ point: point, distance: getDistanceFromLatLonInKm(lat, lng, point[1], point[0]) }));
+        return distances.reduce((acc, val) => val.distance < acc.distance ? val : acc);
   },
 
   async region(name) {
