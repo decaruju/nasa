@@ -62,23 +62,23 @@ const store = {
       {
         id: 1,
         before: true,
-        text: 'Combien de personnes (enfants et adultes) résident chez vous?',
+        text: `Inscrire le nombre total de personnes habitant à cette adresse.`,
       },{
         id: 1,
         before: true,
-        text: `S'il y a des enfants, combien et quelle ages ont ils?`,
+        text: `Inscrire le nombre d'enfants habitant à cette adresse.`,
       },{
         id: 4,
         before: true,
-        text: "Est-ce qu\'il y à des gens avec une santé à risque? Si oui, expliquez",
+        text: `Inscrire les problèmes de santés des personnes habitant à cette adresse.`,
       },{
         id: 2,
         before: true,
-        text: 'Avez-vous des animaux?',
+        text: 'Inscrire les animaux habitant à cette adresse.',
       },{
         id: 2,
         before: true,
-        text: 'Disposez-vous de canots?',
+        text: `Disposez-vous d'une embarcation?`,
       },{
         id: 2,
         before: true,
