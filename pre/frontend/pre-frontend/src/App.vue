@@ -1,10 +1,11 @@
 <template>
-  <div class="app-container">
+  <div class="app-container" :class="{before:!flood, during:flood}">
       <div class="app">
           <router-view />
       </div>
       <div class="topbar">
-          <img src="../public/logo.png" width="50px"/>
+          <img v-if="flood" @click="flood = !flood" src="../public/logo_pendant.png" width="50px"/>
+          <img v-else @click="flood = !flood" src="../public/logo_avant.png" width="50px"/>
       </div>
   </div>
 </template>
@@ -12,6 +13,11 @@
 <script>
 export default {
   name: 'App',
+     data() {
+         return {
+             flood: false,
+         }
+     }
 }
 </script>
 
