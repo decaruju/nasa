@@ -12,20 +12,37 @@ const data = {};
 const map = require('./geo.json');
 
 const store = {
-  async fetchAll() {
-    const latitudeValues = Object.values(data)
-    return latitudeValues.map((latitudeValue) => {
-      return Object.values(latitudeValue).slice(-1).pop();
-    }).flat();
+  async fetchAllDots() {
+    let elements = [];
+
+    const lats = Object.keys(data);
+    lats.forEach((lat) => {
+      const latValue = data[lat];
+      const lngs = Object.keys(latValue);
+
+      lngs.forEach((lng) => {
+        elements.push({
+          lng: lng,
+          lat: lat,
+        });
+      });
+    });
+
+    return elements;
   },
 
-  async add(item) {
-    const latitude = item.address.latitude;
-    const longitude = item.address.longitude;
+  async add({ lng, lat, answer }) {
+    data[lat] = data[lat] || {};
+    data[lat][lng] = data[lat][lng] || [];
+    data[lat][lng].push(answer);
+  },
 
-    data[latitude] = data[latitude] || {};
-    data[latitude][longitude] = data[latitude][longitude] || [];
-    data[latitude][longitude].push(item);
+  async getAnswers({ lng, lat }) {
+    if (!data[lat]) return [];
+
+    const answers = data[lat][lng] || [];
+
+    return answers;
   },
 
   async getQuestion() {
@@ -54,8 +71,8 @@ const store = {
   },
 };
 
-seed.forEach((item, index) => {
-  store.add(item);
+seed.forEach((item) => {
+  store.add({ lat: item.address.lat, lng: item.address.lng, answer: item.answers });
 });
 
 module.exports = store;

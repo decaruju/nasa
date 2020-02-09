@@ -1,21 +1,14 @@
 <template>
     <div class="address-input">
-        <vue-google-autocomplete
-            id="map"
-            classname="form-control"
-            @placechanged="placeChanged"
-            country="ca"
-            placeholder="Start Typing"
-        />
+        <gmap-autocomplete
+          @place_changed="placeChanged">
+        </gmap-autocomplete>
     </div>
 </template>
 
 <script>
- import VueGoogleAutocomplete from 'vue-google-autocomplete';
-
  export default {
      name: 'address-input',
-    components: { VueGoogleAutocomplete },
      data() {
          return {
              address: undefined,
@@ -24,7 +17,6 @@
 
      methods: {
          placeChanged(address) {
-             console.log('placeChanged');
              this.$emit('input', address);
          },
      },
