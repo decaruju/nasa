@@ -26,7 +26,7 @@ module.exports = (app) => {
 
   app.post('/answers', (req, res) => {
     let address = req.session.address;
-    
+
     if (req.body.lng) address.lng = req.body.lng;
     if (req.body.lat) address.lat = req.body.lat;
 
