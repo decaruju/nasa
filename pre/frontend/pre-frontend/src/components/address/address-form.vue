@@ -93,6 +93,8 @@ import store from '../../shared/store';
             store.address = this.address;
             store.inRisk = this.inRisk;
             store.closest = this.closest;
+            console.log('passe ici');
+            
             this.$router.push(`question/${1}`)
          },
      },

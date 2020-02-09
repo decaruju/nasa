@@ -44,11 +44,63 @@ const store = {
     data[lat][lng].answers.push(answer);
   },
 
+  async getRequests() {
+
+    let requests = [];
+
+    let req = await this.getPossibleRequests();
+    req = req.reduce((acc, e) => {
+      acc[e.id] = e;
+      return acc;
+    }, {});
+
+    Object.keys(data).forEach((lat) => {
+      Object.keys(data[lat]).forEach((lng) => {
+        requests = [...requests, ...data[lat][lng].requests.map((obj) => { 
+          ids = Object.keys(obj);
+          return ids.reduce((acc, id) => { 
+            acc[id] = {
+              response: obj[id],
+              answer: req[id]
+            };
+            return acc;
+           }, {});
+        })];
+      });
+    });
+
+    return requests;
+  },
+
   async addRequest({ lng, lat, request }) {
     initLoc({ lat, lng });
     data[lat][lng].requests.push(request);
   },
 
+  async getPossibleRequests() {
+    return [
+        {
+          id: 1,
+          text: 'Voulez-vous vous inscrire à la distribution de denrées?',
+          type: 'radio',
+          posibility: [
+            {
+              value: 1,
+              text: 'Oui',
+            },
+            {
+              value: 2,
+              text: 'Non',
+            },
+          ]
+        },
+        {
+          id: 2,
+          text: `Inscrire les médicaments dont vous avez besoin.`,
+          type: 'text',
+        },
+      ];
+  },
   async getAnswers({ lng, lat }) {
     if (!data[lat]) return [];
 

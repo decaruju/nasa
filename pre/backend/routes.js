@@ -14,28 +14,7 @@ module.exports = (app) => {
 
   app.post('/possible_requests', async (req, res) => {
     res.send({
-      payload: [
-        {
-          id: 1,
-          text: 'Voulez-vous vous inscrire à la distribution de denrées?',
-          type: 'radio',
-          posibility: [
-            {
-              value: 1,
-              text: 'Oui',
-            },
-            {
-              value: 2,
-              text: 'Non',
-            },
-          ]
-        },
-        {
-          id: 2,
-          text: `Inscrire les médicaments dont vous avez besoin.`,
-          type: 'text',
-        },
-      ],
+      payload: await store.getPossibleRequests(),
     });
   });
 
