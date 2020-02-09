@@ -12,6 +12,21 @@ module.exports = (app) => {
     res.send(questions);
   });
 
+  app.post('/possible_requests', async (req, res) => {
+    res.send({
+      payload: [
+        {
+          text: 'Voulez-vous vous inscrire à la distribution de denrées?',
+          type: 'checkbox',
+        },
+        {
+          text: `Avez-vous besoin de médicaments?`,
+          type: 'text',
+        },
+      ],
+    });
+  });
+
   app.post('/in_risk', async(req, res) => {
     req.session.address = req.body.address;
 

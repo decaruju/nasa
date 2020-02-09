@@ -17,7 +17,7 @@ export default {
          return {
              flood: false,
          }
-     }
+     },
 }
 </script>
 
@@ -31,6 +31,7 @@ export default {
       padding: 0;
       margin: 0;
       color: #2E4478;
+
       .topbar {
           width: 100%;
           padding: 20px;
@@ -39,6 +40,14 @@ export default {
           box-shadow: 5px 0 10px 4px;
           position: absolute;
           top: 0;
+
+          img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
       }
   }
 .app-container {

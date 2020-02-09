@@ -6,6 +6,7 @@ import QuestionFormPage from './components/question/question-form-page.vue';
 import axios from 'axios';
 import ImageDisplay from './components/image/image-display.vue';
 import AdminPage from './components/admin/admin-page.vue';
+import Request from './components/request/request.vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
 
 axios.defaults.withCredentials = true;
@@ -26,6 +27,7 @@ const routes = [
   { path: '/', component: AddressForm },
     { path: '/question/:id', component: QuestionFormPage },
     { path: '/image/:id', component: ImageDisplay },
+    { path: '/request', component: Request },
     { path: '/admin', component: AdminPage },
 ];
 

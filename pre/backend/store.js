@@ -76,7 +76,6 @@ const store = {
         before: true,
         text: "Est-ce qu\'il y à des gens avec une santé à risque? Si oui, expliquez",
       },{
-      },{
         id: 5,
         text: "Quelle est la hauteur de l'eau? Indiqué l'unité de mesure utilisé",
       },{
