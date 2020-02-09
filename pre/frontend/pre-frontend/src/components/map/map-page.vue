@@ -1,8 +1,5 @@
 <template>
     <div class="requests">
-        <button @click="start">
-            Lancer la livraison
-        </button>
         <GmapMap
             :center="center"
             :zoom="16"
@@ -16,10 +13,23 @@
                 :position="last"
             />
         </GmapMap>
+
+        <div>
+            <h2>Requêtes</h2>
+            <div v-for="(request, idx) in requests" :key="idx">
+                {{
+                    request
+                }}
+                <button @click="start">
+                    Lancer la livraison
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 
  export default {
     name: 'map',
@@ -27,7 +37,13 @@
     data() {
         return {
             data: [],
+            requests: undefined,
         };
+    },
+
+    async created() {
+        const response = await axios.get('http://localhost:8081/requests');
+         this.requests = response.data.payload;
     },
 
      computed: {

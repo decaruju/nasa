@@ -58,7 +58,7 @@ import formFactory from '../form/factory';
       },
 
       async send() {
-        await axios.post('http://localhost:8081/request', { request: this.form });
+        await axios.post('http://localhost:8081/request', { address: Helper.getPosition(this.address), request: this.answers });
         this.$router.push(`/`)
       },
     },
