@@ -8,6 +8,8 @@ import ImageDisplay from './components/image/image-display.vue';
 import AdminPage from './components/admin/admin-page.vue';
 import Request from './components/request/request.vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
+import VueSocketIO from 'vue-socket.io';
+import MapPage from './components/map/map-page';
 
 axios.defaults.withCredentials = true;
 
@@ -29,7 +31,12 @@ const routes = [
     { path: '/image/:id', component: ImageDisplay },
     { path: '/request', component: Request },
     { path: '/admin', component: AdminPage },
+    { path: '/map', component: MapPage },
 ];
+
+Vue.use(new VueSocketIO({
+    connection: 'ws://localhost:5000',
+}));
 
 const router = new VueRouter({
   routes
