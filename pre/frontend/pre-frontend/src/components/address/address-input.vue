@@ -1,17 +1,15 @@
 <template>
-    <div class="input-container">
-        <div class="input-with-placeholder">
-             <gmap-autocomplete
-                @place_changed="placeChanged"
-                placeholder=""
-                required
-            />
-            <div class="placeholder">
-                Entrez votre addresse.
-            </div>
+    <div class="textfield">
+     <div class="placeholder">
+            Entrez votre addresse.
         </div>
+        <gmap-autocomplete
+            class="input"
+            @place_changed="placeChanged"
+            placeholder=""
+            required
+        />
     </div>
-   
 </template>
 
 <script>

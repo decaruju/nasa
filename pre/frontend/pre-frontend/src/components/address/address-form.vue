@@ -1,24 +1,26 @@
 <template>
-    <div>
-     <GmapMap
-        :center="center"
-        :zoom="16"
-        map-type-id="terrain"
+  <div>
+    <GmapMap
+      :center="center"
+      :zoom="16"
+      map-type-id="terrain"
     >
-    <template v-if="regions">
-        <GmapPolygon v-for="(path, index) in regions" :key="index" :paths="path" />
-    </template>
+      <template v-if="regions">
+          <GmapPolygon v-for="(path, index) in regions" :key="index" :paths="path" />
+      </template>
 
-    <GmapMarker
+      <GmapMarker
         v-if="address"
         :position="center"
-    />
-    <GmapPolyline
-        :path="[center, closest]"
-    />
+      />
 
+      <GmapPolyline
+        :path="[center, closest]"
+      />
     </GmapMap>
-        <address-input @input="onInput" />
+
+    <h2>Suis-je à risque?</h2>
+    <address-input @input="onInput" />
 
         <div class="address-info" v-if="address">
             <div>
@@ -29,8 +31,10 @@
         <div v-if="inRisk !== undefined">
             {{inRisk ? 'Vous êtes à risque' : "vous n'êtes pas à risque"}}
         </div>
-        <div v-if="address" class="button-container">
-            <button @click="submit">
+        <div>
+            <button @click="submit" class="mdl-button mdl-button--raise"
+                :class="{ 'mdl-button--disabled': !address, 'mdl-button--colored': address  }"
+            >
                 S'inscrire
             </button>
         </div>
@@ -40,7 +44,8 @@
 <script>
 import AddressInput from './address-input.vue';
 import Helper from '../../shared/helper';
- import axios from 'axios';
+import axios from 'axios';
+import store from '../../shared/store';
 
  export default {
      name: 'address-form',
@@ -78,15 +83,21 @@ import Helper from '../../shared/helper';
                 { address: Helper.getPosition(this.address) }
             );
             this.inRisk = response.data.inRisk;
-             this.closest = undefined;
-             if (!this.inRisk) {
-                 this.closest = response.data.floodability.point;
-                 this.closest = { lat: this.closest[1], lng: this.closest[0] };
-             }
+            this.closest = undefined;
+
+            if (!this.inRisk) {
+                this.closest = response.data.floodability.point;
+                this.closest = { lat: this.closest[1], lng: this.closest[0] };
+            }
          },
 
-         async submit() {
-             this.$router.push(`question/${1}`)
+        async submit() {
+            if(!this.address) return;
+
+            store.address = this.address;
+            store.inRisk = this.inRisk;
+            store.closest = this.closest;
+            this.$router.push(`question/${1}`)
          },
      },
  }

@@ -17,6 +17,7 @@
 import AddressInput from '../address/address-input.vue';
 import axios from 'axios';
 import Helper from '../../shared/helper';
+import store from '../../shared/store';
 import formFactory from '../form/factory';
 
 console.log(formFactory.components);
@@ -38,18 +39,20 @@ console.log(formFactory.components);
     },
 
     async created() {
-      console.log('passe ici');
-      
-      const address = {
-        geometry: {
-          location: {
-            lng: () => (-72.73946339999999), lat:() => (46.5212592),
-          },
-        },
-      };
-      const response = await axios.post('http://localhost:8081/possible_requests', { address: Helper.getPosition(address) });
-      this.address = address;
-      this.questions = response.data.payload;
+      // console.log('passe ici');
+      if(store.address) {
+        this.onInput(store.address);
+      }
+      // const address = {
+      //   geometry: {
+      //     location: {
+      //       lng: () => (-72.73946339999999), lat:() => (46.5212592),
+      //     },
+      //   },
+      // };
+      // const response = await axios.post('http://localhost:8081/possible_requests', { address: Helper.getPosition(address) });
+      // this.address = address;
+      // this.questions = response.data.payload;
     },
 
     methods: {
@@ -58,6 +61,7 @@ console.log(formFactory.components);
       },
       
       async onInput(address) {
+        store.address = address;
         const response = await axios.post('http://localhost:8081/possible_requests', { address: Helper.getPosition(address) });
         this.address = address;
         this.questions = response.data.payload;

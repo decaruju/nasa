@@ -1,12 +1,10 @@
 <template>
-    <div class="input-container">
-      <div class="input-with-placeholder">
-          <input type="text" @input="onInput">
-          <div class="placeholder">
-            {{ question.text }}
-          </div>
-      </div>
+  <div>
+    <div class="textfield">
+      <label class="placeholder" :for="question.id">{{ question.text }}</label>
+      <input class="input" type="text" @input="onInput" :id="question.id">
     </div>
+  </div>
 </template>
 
 <script>
