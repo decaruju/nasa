@@ -1,6 +1,7 @@
 <template>
     <div class="input-container">
       <div class="input-with-placeholder">
+          <input type="text" @input="onInput">
           <div class="placeholder">
             {{ question.text }}
           </div>
@@ -22,8 +23,10 @@
      },
 
      methods: {
-         onInput(value) {
-            this.$emit('input', value);
+         onInput(event) {
+           console.log('value::', event.target.value);
+           
+            this.$emit('input', event.target.value);
          },
      },
  };

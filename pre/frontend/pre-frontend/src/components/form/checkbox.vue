@@ -1,28 +1,44 @@
 <template>
-    <div class="input-container">
-      <div class="input-with-placeholder">
-          <div class="placeholder">
-            {{ question.text }}
-          </div>
-      </div>
+  <div class="input-container checkbox">
+    <div class="placeholder">
+      {{ question.text }}
     </div>
+
+    <label 
+    v-for="posibility in question.posibility" 
+    :key="posibility.value">
+      <input 
+        :value="posibility.value" 
+        type="radio"
+        :checked="value == posibility.value"
+        @change="onClick(posibility.value)"
+      >
+      {{ posibility.text }}
+    </label> 
+  </div>
 </template>
 
 <script>
  export default {
-     name: 'form-input',
+     name: 'form-checkbox',
      data() {
          return {
-            
+            checked: undefined,
          };
      },
 
      props: {
        question: undefined,
+       value: {
+        type: undefined,
+        default: undefined,
+      },
      },
 
      methods: {
-         onInput(value) {
+         onClick(value) {
+           console.log('value::', value);
+           
             this.$emit('input', value);
          },
      },

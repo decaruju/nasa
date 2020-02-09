@@ -2,9 +2,9 @@
     <div class="requests">
       <div v-if="address">
         <div>
-          <label v-for="question in questions" :key="question.id">
-            <component :is="getComponent(question.type)" :question="question" />
-        </label>
+          <div v-for="question in questions" :key="question.id">
+            <component :is="getComponent(question.type)" v-model="answers[question.id]" :question="question" />
+        </div>
         </div>
       </div>
       <div v-else>
@@ -19,6 +19,8 @@ import axios from 'axios';
 import Helper from '../../shared/helper';
 import formFactory from '../form/factory';
 
+console.log(formFactory.components);
+
  export default {
     name: 'request',
 
@@ -26,6 +28,7 @@ import formFactory from '../form/factory';
         return {
             address: undefined,
             questions: undefined,
+            answers: {},
         };
     },
 
@@ -53,11 +56,11 @@ import formFactory from '../form/factory';
       getComponent(type) {
         return formFactory.component(type);
       },
+      
       async onInput(address) {
         const response = await axios.post('http://localhost:8081/possible_requests', { address: Helper.getPosition(address) });
         this.address = address;
         this.questions = response.data.payload;
-        console.log('this.questions::', this.questions);
       },
 
     },

@@ -16,10 +16,22 @@ module.exports = (app) => {
     res.send({
       payload: [
         {
+          id: 1,
           text: 'Voulez-vous vous inscrire à la distribution de denrées?',
           type: 'checkbox',
+          posibility: [
+            {
+              value: 1,
+              text: 'Oui',
+            },
+            {
+              value: 2,
+              text: 'Non',
+            },
+          ]
         },
         {
+          id: 2,
           text: `Avez-vous besoin de médicaments?`,
           type: 'text',
         },

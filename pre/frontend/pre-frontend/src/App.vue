@@ -75,30 +75,35 @@ export default {
      }
      
      input {
-         box-sizing: border-box;
-         width: 100%;
-         padding: 20px;
-         border-radius: 5px;
-         border: none;
-         border-bottom: 4px solid #2E4478;
-         box-shadow: 2px 2px 5px 5px #A0AECE;
-         background-color: #FAFAFF;
-         font-size: 24px;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 20px;
+        border-radius: 5px;
+        border: none;
+        border-bottom: 4px solid #2E4478;
+        box-shadow: 2px 2px 5px 5px #A0AECE;
+        background-color: #FAFAFF;
+        font-size: 24px;
 
-         + .placeholder {
-             position: absolute;
-             top: 32px;
-             left: 10px;
-             font-size: 32px;
-             transition: all 0.2s ease-in-out;
-         }
+        + .placeholder {
+            position: absolute;
+            top: 32px;
+            left: 10px;
+            font-size: 32px;
+            transition: all 0.2s ease-in-out;
+        }
 
-         &:focus, &:valid {
-             + .placeholder {
-                 font-size: 20px;
-                 top: -30px;
-             }
-         }
+        &:focus, &:valid {
+            + .placeholder {
+                font-size: 20px;
+                top: -30px;
+            }
+        }
+
+        &[type="checkbox"], &[type="radio"] {
+            box-shadow: none;
+            width: 20px;
+        }
      }
 
      .address-info {
