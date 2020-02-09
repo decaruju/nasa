@@ -15,11 +15,8 @@
 >
 </GmapMarker>
 </GmapMap>
-Entrez votre addresse.
 
-<gmap-autocomplete
-    @place_changed="placeChanged">
-</gmap-autocomplete>
+<address-input @input="placeChanged" />
 
 <question-form v-if="address" v-model="form" :questions="questions" />
 
@@ -34,10 +31,11 @@ Entrez votre addresse.
 <script>
  import axios from 'axios';
  import QuestionForm from '../question/question-form';
+ import AddressInput from '../address/address-input';
 
  export default {
      name: 'admin-page',
-     components: { QuestionForm },
+     components: { QuestionForm, AddressInput, },
      data() {
          return {
              data: [],
@@ -56,7 +54,6 @@ Entrez votre addresse.
      },
      methods: {
         async placeChanged(address) {
-            this.address = undefined;
             const response = await axios.get('http://localhost:8081/questions');
             const answers = await axios.get('http://localhost:8081/answers', {
                 params: this.getPosition(address),

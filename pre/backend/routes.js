@@ -12,6 +12,33 @@ module.exports = (app) => {
     res.send(questions);
   });
 
+  app.post('/possible_requests', async (req, res) => {
+    res.send({
+      payload: [
+        {
+          id: 1,
+          text: 'Voulez-vous vous inscrire à la distribution de denrées?',
+          type: 'radio',
+          posibility: [
+            {
+              value: 1,
+              text: 'Oui',
+            },
+            {
+              value: 2,
+              text: 'Non',
+            },
+          ]
+        },
+        {
+          id: 2,
+          text: `Avez-vous besoin de médicaments?`,
+          type: 'text',
+        },
+      ],
+    });
+  });
+
   app.post('/in_risk', async(req, res) => {
     req.session.address = req.body.address;
 

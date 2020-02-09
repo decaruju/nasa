@@ -18,14 +18,7 @@
     />
 
     </GmapMap>
-        <div class="input-container">
-            <div class="input-with-placeholder">
-                <address-input @input="onInput" />
-                <div class="placeholder">
-                    Entrez votre addresse.
-                </div>
-            </div>
-        </div>
+        <address-input @input="onInput" />
 
         <div class="address-info" v-if="address">
             <div>
@@ -46,6 +39,7 @@
 
 <script>
 import AddressInput from './address-input.vue';
+import Helper from '../../shared/helper';
  import axios from 'axios';
 
  export default {
@@ -81,7 +75,7 @@ import AddressInput from './address-input.vue';
             };
             const response = await axios.post(
                 'http://localhost:8081/in_risk',
-                { address: this.getPosition(this.address) }
+                { address: Helper.getPosition(this.address) }
             );
             this.inRisk = response.data.inRisk;
              this.closest = undefined;
@@ -94,14 +88,6 @@ import AddressInput from './address-input.vue';
          async submit() {
              this.$router.push(`question/${1}`)
          },
-
-         getPosition(address) {
-            console.log(address);
-            return {
-                lng: address.geometry.location.lng(),
-                lat: address.geometry.location.lat(),
-            };
-        },
      },
  }
 </script>

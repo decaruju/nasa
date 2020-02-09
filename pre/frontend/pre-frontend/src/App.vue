@@ -17,7 +17,7 @@ export default {
          return {
              flood: false,
          }
-     }
+     },
 }
 </script>
 
@@ -31,6 +31,7 @@ export default {
       padding: 0;
       margin: 0;
       color: #2E4478;
+
       .topbar {
           width: 100%;
           padding: 20px;
@@ -39,6 +40,14 @@ export default {
           box-shadow: 5px 0 10px 4px;
           position: absolute;
           top: 0;
+
+          img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
       }
   }
 .app-container {
@@ -66,30 +75,35 @@ export default {
      }
      
      input {
-         box-sizing: border-box;
-         width: 100%;
-         padding: 20px;
-         border-radius: 5px;
-         border: none;
-         border-bottom: 4px solid #2E4478;
-         box-shadow: 2px 2px 5px 5px #A0AECE;
-         background-color: #FAFAFF;
-         font-size: 24px;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 20px;
+        border-radius: 5px;
+        border: none;
+        border-bottom: 4px solid #2E4478;
+        box-shadow: 2px 2px 5px 5px #A0AECE;
+        background-color: #FAFAFF;
+        font-size: 24px;
 
-         + .placeholder {
-             position: absolute;
-             top: 32px;
-             left: 10px;
-             font-size: 32px;
-             transition: all 0.2s ease-in-out;
-         }
+        + .placeholder {
+            position: absolute;
+            top: 32px;
+            left: 10px;
+            font-size: 32px;
+            transition: all 0.2s ease-in-out;
+        }
 
-         &:focus, &:valid {
-             + .placeholder {
-                 font-size: 20px;
-                 top: -30px;
-             }
-         }
+        &:focus, &:valid {
+            + .placeholder {
+                font-size: 20px;
+                top: -30px;
+            }
+        }
+
+        &[type="checkbox"], &[type="radio"] {
+            box-shadow: none;
+            width: 20px;
+        }
      }
 
      .address-info {
