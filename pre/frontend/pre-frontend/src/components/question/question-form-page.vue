@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <question-form v-model="form" :questions="questions" />
+  <div>
+    <question-form v-model="form" :questions="questions" />
 
-        <div>
-            <button @click="send">
-                Envoyer les informations supplémentaires.
-            </button>
-        </div>
+    <div>
+      <button @click="send" class="mdl-button mdl-button--raise mdl-button--colored">
+          Envoyer les informations supplémentaires.
+      </button>
     </div>
+  </div>
 </template>
 
 <script>

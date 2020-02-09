@@ -41,8 +41,6 @@
 
      methods: {
          onClick(value) {
-           console.log('value::', value);
-           
             this.$emit('input', value);
          },
      },
