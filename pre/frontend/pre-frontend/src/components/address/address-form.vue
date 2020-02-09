@@ -53,7 +53,7 @@ import AddressInput from './address-input.vue';
          return {
             address: undefined,
             inRisk: undefined,
-            paths: undefined,
+            regions: undefined,
          };
      },
 
@@ -63,7 +63,7 @@ import AddressInput from './address-input.vue';
          console.log("passe ici");
          this.regions = response.data.maps;
 
-         console.log('this.paths::', this.paths);
+         console.log('this.paths::', this.regions);
          
      },
 
