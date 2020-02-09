@@ -4,7 +4,6 @@
         :center="center"
         :zoom="16"
         map-type-id="terrain"
-        style="width: 500px; height: 300px"
     >
     <template v-if="regions">
         <GmapPolygon v-for="(path, index) in regions" :key="index" :paths="path" />
@@ -30,7 +29,7 @@
         <div v-if="inRisk !== undefined">
             {{inRisk ? 'Vous êtes à risque' : "vous n'êtes pas à risque"}}
         </div>
-        <div v-if="address" class="button-container">
+        <div v-if="inRisk" class="button-container">
             <button @click="submit">
                 S'inscrire
             </button>
@@ -51,17 +50,14 @@ import AddressInput from './address-input.vue';
             address: undefined,
             inRisk: undefined,
             regions: undefined,
+             closest: undefined,
+             showAnyway: false,
          };
      },
 
      async created() {
-        
-         const response = await axios.get('http://localhost:8081/flooding_risk'); 
-         console.log("passe ici");
+         const response = await axios.get('http://localhost:8081/flooding_risk');
          this.regions = response.data.maps;
-
-         console.log('this.paths::', this.regions);
-         
      },
 
      components: {
@@ -69,12 +65,11 @@ import AddressInput from './address-input.vue';
      },
 
      methods: {
-         async onInput(address) { 
+         async onInput(address) {
              console.log('address::', address);
-                        
              this.address = address;
-             this.center = { 
-                 lat: this.address.geometry.location.lat(), 
+             this.center = {
+                 lat: this.address.geometry.location.lat(),
                  lng: this.address.geometry.location.lng()
             };
             const response = await axios.post(
@@ -82,6 +77,11 @@ import AddressInput from './address-input.vue';
                 { address: this.getPosition(this.address) }
             );
             this.inRisk = response.data.inRisk;
+             this.closest = undefined;
+             if (!this.inRisk) {
+                 this.closest = response.data.floodability.point;
+                 this.closest = { lat: this.closest[1], lng: this.closest[0] };
+             }
          },
 
          async submit() {
