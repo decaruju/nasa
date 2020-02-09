@@ -27,12 +27,12 @@
             </div>
         </div>
 
-        <div>
-            {{inRisk}}
+        <div v-if="inRisk !== undefined">
+            {{inRisk ? 'Vous êtes à risque' : "vous n'êtes pas à risque"}}
         </div>
         <div v-if="address" class="button-container">
             <button @click="submit">
-                Confirmer
+                S'inscrire
             </button>
         </div>
     </div>
@@ -69,23 +69,23 @@ import AddressInput from './address-input.vue';
      },
 
      methods: {
-         onInput(address) {  
+         async onInput(address) { 
              console.log('address::', address);
                         
              this.address = address;
              this.center = { 
                  lat: this.address.geometry.location.lat(), 
-                 lng: this.address.geometry.location.lng() };
+                 lng: this.address.geometry.location.lng()
+            };
+            const response = await axios.post(
+                'http://localhost:8081/in_risk',
+                { address: this.getPosition(this.address) }
+            );
+            this.inRisk = response.data.inRisk;
          },
 
          async submit() {
-             const response = await axios.post(
-                'http://localhost:8081/in_risk', 
-                { address: this.getPosition(this.address) }
-            );
-
-             this.inRisk = response.data.inRisk;
-             //this.$router.push(`question/${response.data.id}`)
+             this.$router.push(`question/${1}`)
          },
 
          getPosition(address) {
