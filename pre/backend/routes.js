@@ -13,6 +13,7 @@ module.exports = (app) => {
       const inRisk = await floodingArea.addressInRisk(req.body.address);
       const response = { inRisk };
       if (inRisk === -1) {
+          console.log(req.body.address)
           response.floodability = floodingArea.floodability(req.body.address.geometry.location);
       }
 
@@ -20,7 +21,6 @@ module.exports = (app) => {
   });
 
   app.get('/flooding_risk/:region?', async(req, res) => {
-  
     res.send({ maps: await floodingArea.region(req.params.region) });
   });
 
