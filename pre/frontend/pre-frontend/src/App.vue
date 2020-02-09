@@ -49,10 +49,14 @@ export default {
          position: relative;
      }
 
-     .address-input {
+     .input-container {
          width: 100%;
          padding: 10%;
          box-sizing: border-box;
+     }
+
+     .input-with-placeholder {
+         position: relative;
      }
      
      input {
