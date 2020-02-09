@@ -12,9 +12,8 @@ module.exports = (app) => {
 
       const inRisk = await floodingArea.addressInRisk(req.body.address);
       const response = { inRisk };
-      if (inRisk === -1) {
-          console.log(req.body.address)
-          response.floodability = floodingArea.floodability(req.body.address.geometry.location);
+      if (!inRisk) {
+          response.floodability = await floodingArea.floodability(req.body.address);
       }
 
       res.send(response);

@@ -46,7 +46,15 @@ export default {
          position: relative;
      }
 
-     #map {
+     .address-input {
+         width: 100%;
+         padding: 10%;
+         box-sizing: border-box;
+     }
+     
+     input {
+         box-sizing: border-box;
+         width: 100%;
          padding: 20px;
          border-radius: 5px;
          margin-bottom: 40px;

@@ -56,7 +56,7 @@ import AddressInput from './address-input.vue';
 
      async created() {
         
-         const response = await axios.get('http://localhost:8081/flooding_risk/shawinigan'); 
+         const response = await axios.get('http://localhost:8081/flooding_risk'); 
          console.log("passe ici");
          this.regions = response.data.maps;
 
