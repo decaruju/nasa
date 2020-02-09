@@ -13,10 +13,11 @@
         v-if="address"
         :position="center"
     />
+    <GmapPolyline
+        :path="[center, closest]"
+    />
 
     </GmapMap>
-
-
         <div class="input-container">
             <div class="input-with-placeholder">
                 <address-input @input="onInput" />

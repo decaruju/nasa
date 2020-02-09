@@ -2,7 +2,7 @@
     <gmap-autocomplete
         @place_changed="placeChanged"
         placeholder=""
-      required
+        required
     />
 </template>
 
