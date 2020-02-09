@@ -49,10 +49,10 @@ const store = {
     return [
       {
         id: 1,
-        text: 'premiere question',
+        text: 'Combien de personnes résident chez vous?',
       },{
         id: 2,
-        text: 'deuxieme question',
+        text: 'Avez-vous des animaux?',
       },{
         id: 3,
         text: 'troisieme question',

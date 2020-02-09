@@ -1,5 +1,20 @@
 <template>
     <div>
+     <GmapMap
+        :center="center"
+        :zoom="16"
+        map-type-id="terrain"
+    >
+    <template v-if="regions">
+        <GmapPolygon v-for="(path, index) in regions" :key="index" :paths="path" />
+    </template>
+
+    <GmapMarker
+        v-if="address"
+        :position="center"
+    />
+
+    </GmapMap>
 
         Entrez votre addresse.
 
@@ -19,26 +34,6 @@
                 S'inscrire
             </button>
         </div>
-     <GmapMap
-        :center="center"
-        :zoom="16"
-        map-type-id="terrain"
-        style="width: 500px; height: 300px"
-    >
-    <template v-if="regions">
-        <GmapPolygon  v-for="(path, index) in regions" :key="index" :paths="path" />
-    </template>
-    <GmapPolyline
-        v-if="closest"
-        :path="[center, closest]"
-    />
-
-    <GmapMarker
-        v-if="address"
-        :position="center"
-    />
-
-    </GmapMap>
     </div>
 </template>
 

@@ -20,7 +20,7 @@ export default {
      outline: none;
  }
   html, body, .app-container, .app {
-  height: 100%;
+      height: 100%;
       background-color: #FAFAFF;
       padding: 0;
       margin: 0;
@@ -35,6 +35,9 @@ export default {
           top: 0;
       }
   }
+.app-container {
+    margin-top: 5%;
+}
  html body {
      .app {
          background-color: #D0D8E9;
@@ -109,5 +112,10 @@ html {
          text-transform: uppercase;
          border-radius: 2px;
      }
+ }
+
+ .vue-map-container {
+     width: 100%;
+     height: 500px;
  }
 </style>
