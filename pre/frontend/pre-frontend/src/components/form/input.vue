@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="textfield">
-      <input class="input" type="text" @input="onInput" :id="question.id">
       <label class="placeholder" :for="question.id">{{ question.text }}</label>
+      <input class="input" type="text" @input="onInput" :id="question.id">
     </div>
   </div>
 </template>

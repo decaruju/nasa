@@ -10,11 +10,14 @@
         </div>
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-          <a v-for="(header, index) in headers" :key="index" :href="'/#'+header.link" class="mdl-layout__tab" @click="active=index" :class="{ 'is-active': index==active }">{{ header.text }}</a>
+          <a v-for="(header, index) in filteredHeader" :key="index" :href="'/#'+header.link" class="mdl-layout__tab" @click="active=index" :class="{ 'is-active': index==active }">{{ header.text }}</a>
         </div>
       </header>
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title">RIU</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" @click="admin=!admin">Admin</a>
+        </nav>
       </div>
       <main class="mdl-layout__content">
         <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
@@ -35,21 +38,41 @@ export default {
 
   components: {
   },
+
   data() {
-      return {
-        flood: false,
-        active: 0,
-        headers: [
-          {
-            link: '/',
-            text: 'Suis-je à risque'
-          },
-          {
-            link: '/request',
-            text: `J'ai besoin d'aide`,
-          },
-        ]
-      }
+    return {
+      flood: false,
+      active: 0,
+      admin: false,
+      headers: [
+        {
+          link: '/',
+          text: 'Suis-je à risque'
+        },
+        {
+          link: '/request',
+          text: `J'ai besoin d'aide`,
+        },
+        {
+          admin: true,
+          link: '/admin',
+          text: `Validation`,
+        },
+        {
+          admin: true,
+          link: '/map',
+          text: `Dépêcher un drône`,
+        },
+      ]
+    };
+  },
+
+  computed: {
+    filteredHeader() {
+      return this.headers.filter((header) => {
+        return !header.admin || (header.admin == true && this.admin);
+      });
+    },
   },
 }
 </script>
@@ -102,22 +125,22 @@ export default {
         }
 
         + .placeholder, +.label {
-            position: absolute;
-            top: 24px;
-            left: 10px;
+            // position: absolute;
+            // top: 24px;
+            // left: 10px;
             font-size: 16px;
 
-            transition-duration: .2s;
-            transition-timing-function: cubic-bezier(.4,0,.2,1);
+            // transition-duration: .2s;
+            // transition-timing-function: cubic-bezier(.4,0,.2,1);
             //  transition: all 0.2s ease-in-out;
         }
 
-        &:focus, &:valid {
-          + .placeholder, +.label {
-              font-size: 12px;
-              top: 2px;
-          }
-        }
+        // &:focus, &:valid {
+        //   + .placeholder, +.label {
+        //       font-size: 12px;
+        //       top: 2px;
+        //   }
+        // }
 
     }
 
