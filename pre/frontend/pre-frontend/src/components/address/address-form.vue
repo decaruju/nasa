@@ -53,9 +53,18 @@ import AddressInput from './address-input.vue';
          return {
             address: undefined,
             inRisk: undefined,
-            paths: undefined,
-    regions: undefined,
+            regions: undefined,
          };
+     },
+
+     async created() {
+        
+         const response = await axios.get('http://localhost:8081/flooding_risk/shawinigan'); 
+         console.log("passe ici");
+         this.regions = response.data.maps;
+
+         console.log('this.paths::', this.regions);
+         
      },
 
      components: {
