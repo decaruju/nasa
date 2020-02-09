@@ -32,7 +32,7 @@ module.exports = (app) => {
         },
         {
           id: 2,
-          text: `Avez-vous besoin de médicaments?`,
+          text: `Inscrire les médicaments dont vous avez besoin.`,
           type: 'text',
         },
       ],
