@@ -1,34 +1,34 @@
 <template>
-    <div>
-        <GmapMap
-            :center="center"
-            :zoom="16"
-            map-type-id="terrain"
-            style="width: 500px; height: 300px"
-        >
-            <GmapMarker
-                v-for="(address, index) in addresses"
-                :key="index"
-                :position="{ lat: address.lat, lng: address.lng }"
-                :clickable="true"
-                title="foobar"
-            >
-            </GmapMarker>
-        </GmapMap>
-        Entrez votre addresse.
+<div>
+<GmapMap
+    :center="center"
+    :zoom="16"
+    map-type-id="terrain"
+    style="width: 500px; height: 300px"
+>
+<GmapMarker
+    v-for="(address, index) in addresses"
+    :key="index"
+    :position="{ lat: address.lat, lng: address.lng }"
+    :clickable="true"
+    title="foobar"
+>
+</GmapMarker>
+</GmapMap>
+Entrez votre addresse.
 
-        <gmap-autocomplete
-          @place_changed="placeChanged">
-        </gmap-autocomplete>
+<gmap-autocomplete
+    @place_changed="placeChanged">
+</gmap-autocomplete>
 
-        <question-form v-if="address" v-model="form" :questions="questions" />
+<question-form v-if="address" v-model="form" :questions="questions" />
 
-        <div>
-            <button @click="send">
-                Envoyer les informations supplémentaires.
-            </button>
-        </div>
-    </div>
+<div>
+    <button @click="send">
+        Envoyer les informations supplémentaires.
+    </button>
+</div>
+</div>
 </template>
 
 <script>

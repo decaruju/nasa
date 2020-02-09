@@ -7,7 +7,7 @@
         style="width: 500px; height: 300px"
     >
     <template v-if="regions">
-        <GmapPolygon  v-for="(path, index) in regions" :key="index" :paths="path" />
+        <GmapPolygon v-for="(path, index) in regions" :key="index" :paths="path" />
     </template>
 
     <GmapMarker
