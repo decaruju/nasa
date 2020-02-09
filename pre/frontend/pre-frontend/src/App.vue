@@ -1,16 +1,25 @@
 <template>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs" :class="{
+      'app-during': flood,
+      'app-before': !flood,
+    }">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
           <span class="mdl-layout-title">
-            <img v-if="flood" @click="flood = !flood" src="../public/logo_pendant.png" width="50px"/>
-            <img v-else @click="flood = !flood" src="../public/logo_avant.png" width="50px"/>
+            <img v-if="flood" @click="toggleMode" src="../public/logo_pendant.png" width="50px"/>
+            <img v-else @click="toggleMode" src="../public/logo_avant.png" width="50px"/>
           </span>
         </div>
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-          <a v-for="(header, index) in filteredHeader" :key="index" :href="'/#'+header.link" class="mdl-layout__tab" @click="active=index" :class="{ 'is-active': index==active }">{{ header.text }}</a>
+          <a v-for="(header, index) in filteredHeader" 
+            :key="index" 
+            :href="'/#'+header.link" 
+            class="mdl-layout__tab" 
+            :class="{ 'is-active': index==active }"
+            @click="active=index" 
+          >{{ header.text }}</a>
         </div>
       </header>
       <div class="mdl-layout__drawer">
@@ -20,7 +29,7 @@
         </nav>
       </div>
       <main class="mdl-layout__content">
-        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+        <section class="mdl-layout__tab-panel is-active">
           <div class="page-content">
             <div class="app">
               <router-view />
@@ -33,6 +42,8 @@
 </template>
 
 <script>
+import store from './shared/store';
+
 export default {
   name: 'App',
 
@@ -50,6 +61,7 @@ export default {
           text: 'Suis-je à risque'
         },
         {
+          flood: true,
           link: '/request',
           text: `J'ai besoin d'aide`,
         },
@@ -70,17 +82,79 @@ export default {
   computed: {
     filteredHeader() {
       return this.headers.filter((header) => {
-        return !header.admin || (header.admin == true && this.admin);
+        return (!header.flood || (header.flood && this.flood)) 
+          && (!header.admin || (header.admin && this.admin));
       });
     },
+  },
+
+  methods: {
+    toggleMode() {
+      this.flood = !this.flood;
+      store.flood = this.flood;
+    }
   },
 }
 </script>
 
 <style lang="scss">
-    .mdl-layout__header, .mdl-layout__tab-bar {
-      background-color: #A0AECE;
+
+$color-during1: #bf616a;
+$color-during2: #d4949a;
+$color-during3: #dfb1b5;
+$color-during4: #4c566a;
+
+$color-before1: #7082ad;
+$color-before2: #a0acc8;
+$color-before3: #c6ccde;
+$color-before4: #e5e9f0;
+
+
+  .mdl-layout__tab.is-active::after {
+    height: 2px;
+    width: 100%;
+    display: block;
+    content: " ";
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    background: rgb(255,64,129);
+    -webkit-animation: border-expand .2s cubic-bezier(.4,0,.4,1).01s alternate forwards;
+    animation: border-expand .2s cubic-bezier(.4,0,.4,1).01s alternate forwards;
+    transition: all 1s cubic-bezier(.4,0,1,1);
+  }
+  
+  .app-during {
+    .mdl-layout__tab {
+      color: $color-during4;
     }
+
+    .mdl-layout__tab.is-active::after {
+      background: $color-before1;
+    }
+
+    .mdl-layout__header, .mdl-layout__tab-bar {
+      background-color: $color-during2;
+    }
+  }
+
+  .app-before {
+    .mdl-layout__tab {
+      color: $color-before4;
+    }
+
+    .mdl-layout__tab.is-active::after {
+      background: $color-during1;
+    }
+
+    .mdl-layout__header, .mdl-layout__tab-bar {
+      background-color: $color-before2;
+    }
+  }
+
+    // .mdl-layout__header, .mdl-layout__tab-bar {
+    //   background-color: #A0AECE;
+    // }
 
     .mdl-textfield__label {
         color: #2E4478;

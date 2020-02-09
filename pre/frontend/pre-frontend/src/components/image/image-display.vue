@@ -1,7 +1,7 @@
 <template>
     <div class="image">
         Merci pour votre input.
-    <qr-code :value="value" :options="{ scale: 20 }" :error-correction-level="high" :scale="20" />
+    <qr-code :value="value" :options="{ scale: 20 }" error-correction-level="high" :scale="20" />
     </div>
 </template>
 
@@ -15,7 +15,7 @@
      },
      data() {
          return {
-             value: this.$route.params.id,
+            value: '1',
          };
      },
  };

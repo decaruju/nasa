@@ -72,7 +72,6 @@ import store from '../../shared/store';
 
      methods: {
          async onInput(address) {
-             console.log('address::', address);
              this.address = address;
              this.center = {
                  lat: this.address.geometry.location.lat(),

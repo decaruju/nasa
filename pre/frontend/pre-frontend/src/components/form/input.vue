@@ -22,8 +22,6 @@
 
      methods: {
          onInput(event) {
-           console.log('value::', event.target.value);
-           
             this.$emit('input', event.target.value);
          },
      },

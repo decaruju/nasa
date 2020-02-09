@@ -4,7 +4,10 @@
         <div>
           <div v-for="question in questions" :key="question.id">
             <component :is="getComponent(question.type)" v-model="answers[question.id]" :question="question" />
-        </div>
+          </div>
+          <button @click="send" class="mdl-button mdl-button--raise mdl-button--colored">
+            Envoyer la demande
+          </button>
         </div>
       </div>
       <div v-else>
@@ -19,8 +22,6 @@ import axios from 'axios';
 import Helper from '../../shared/helper';
 import store from '../../shared/store';
 import formFactory from '../form/factory';
-
-console.log(formFactory.components);
 
  export default {
     name: 'request',
@@ -39,20 +40,9 @@ console.log(formFactory.components);
     },
 
     async created() {
-      // console.log('passe ici');
       if(store.address) {
         this.onInput(store.address);
       }
-      // const address = {
-      //   geometry: {
-      //     location: {
-      //       lng: () => (-72.73946339999999), lat:() => (46.5212592),
-      //     },
-      //   },
-      // };
-      // const response = await axios.post('http://localhost:8081/possible_requests', { address: Helper.getPosition(address) });
-      // this.address = address;
-      // this.questions = response.data.payload;
     },
 
     methods: {
@@ -67,6 +57,10 @@ console.log(formFactory.components);
         this.questions = response.data.payload;
       },
 
+      async send() {
+        await axios.post('http://localhost:8081/request', { address: Helper.getPosition(this.address), request: this.answers });
+        this.$router.push(`/`)
+      },
     },
  }
 </script>

@@ -53,11 +53,15 @@ module.exports = (app) => {
 
   app.post('/request', async(req, res) => {
     let address = getAddress(req);
-  console.log('req.session.address::', req.session.address);
-  
       store.addRequest({ request: req.body.request, ...address });
 
       res.send({ message: 'merci' });
+  });
+
+  app.get('/requests', async(req, res) => {
+    const data = await store.getRequests();
+
+    res.send({ payload: data });
   });
 
   app.get('/flooding_risk/:region?', async(req, res) => {
@@ -67,8 +71,6 @@ module.exports = (app) => {
 
   app.post('/answers', (req, res) => {
     let address = getAddress(req);
-    console.log('req.session.address::', req.session.address);
-
     if (req.body.lng) address.lng = req.body.lng;
     if (req.body.lat) address.lat = req.body.lat;
 
