@@ -49,19 +49,28 @@ const store = {
     return [
       {
         id: 1,
+        before: true,
         text: 'Combien de personnes résident chez vous?',
       },{
         id: 2,
+        before: true,
         text: 'Avez-vous des animaux?',
       },{
         id: 3,
-        text: 'troisieme question',
+        before: true,
+        text: 'Si vous avez répondus oui à la question précédente, combien et avez-vous des cages et/ou muselière?',
       },{
         id: 4,
-        text: 'quatrieme question',
+        before: true,
+        text: "Est-ce qu\'il y à des gens avec une santé à risque? Si oui, expliquez",
+      },{
       },{
         id: 5,
-        text: 'cinquieme question',
+        text: "Quelle est la hauteur de l'eau? Indiqué l'unité de mesure utilisé",
+      },{
+        id: 6,
+        
+        text: 'Combien de poche de sables vous croyez avoir de besoin?',
       },
     ];
   },
