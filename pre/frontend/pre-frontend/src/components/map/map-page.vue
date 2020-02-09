@@ -16,13 +16,15 @@
 
         <div>
             <h2>Requêtes</h2>
-            <div v-for="(request, idx) in requests" :key="idx">
-                {{
-                    request
-                }}
-                <button @click="start">
+            <div class="demo-card-image mdl-card mdl-shadow--2dp" v-for="(request, idx) in requests" :key="idx">
+                <div class="mdl-card__title mdl-card--expand">
+                    {{ request }}
+                </div>
+                <div class="mdl-card__actions">
+                   <button @click="start" class="mdl-button mdl-button--raise mdl-button--colored">
                     Lancer la livraison
-                </button>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
