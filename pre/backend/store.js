@@ -11,6 +11,14 @@ const seed = require('./seed.js');
 const data = {};
 const map = require('./geo.json');
 
+const initLoc = ({ lat, lng } = {}) => {
+   data[lat] = data[lat] || {};
+    data[lat][lng] = data[lat][lng] || {
+      answers: [],
+      requests: [],
+    };
+}
+
 const store = {
   async fetchAllDots() {
     let elements = [];
@@ -32,15 +40,19 @@ const store = {
   },
 
   async add({ lng, lat, answer }) {
-    data[lat] = data[lat] || {};
-    data[lat][lng] = data[lat][lng] || [];
-    data[lat][lng].push(answer);
+    initLoc({ lat, lng });
+    data[lat][lng].answers.push(answer);
+  },
+
+  async addRequest({ lng, lat, request }) {
+    initLoc({ lat, lng });
+    data[lat][lng].requests.push(request);
   },
 
   async getAnswers({ lng, lat }) {
     if (!data[lat]) return [];
 
-    const answers = data[lat][lng] || [];
+    const answers = data[lat][lng].answers || [];
 
     return answers;
   },

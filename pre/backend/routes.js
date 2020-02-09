@@ -1,6 +1,11 @@
 const floodingArea = require('./flooding_area.js');
 const store = require('./store.js');
 
+const getAddress = (request) => {
+  request.session.address = request.session.address || {};
+  return request.session.address;
+}
+
 module.exports = (app) => {
   app.get('/questions', async (req, res) => {
     const questions = await store.getQuestion();
@@ -19,13 +24,23 @@ module.exports = (app) => {
       res.send(response);
   });
 
+  app.post('/request', async(req, res) => {
+    let address = getAddress(req);
+  console.log('req.session.address::', req.session.address);
+  
+      store.addRequest({ request: req.body.request, ...address });
+
+      res.send({ message: 'merci' });
+  });
+
   app.get('/flooding_risk/:region?', async(req, res) => {
     res.send({ maps: await floodingArea.region(req.params.region) });
   });
 
 
   app.post('/answers', (req, res) => {
-    let address = req.session.address;
+    let address = getAddress(req);
+    console.log('req.session.address::', req.session.address);
 
     if (req.body.lng) address.lng = req.body.lng;
     if (req.body.lat) address.lat = req.body.lat;
