@@ -62,19 +62,31 @@ const store = {
       {
         id: 1,
         before: true,
-        text: 'Combien de personnes résident chez vous?',
+        text: 'Combien de personnes (enfants et adultes) résident chez vous?',
+      },{
+        id: 1,
+        before: true,
+        text: `S'il y a des enfants, combien et quelle ages ont ils?`,
+      },{
+        id: 4,
+        before: true,
+        text: "Est-ce qu\'il y à des gens avec une santé à risque? Si oui, expliquez",
       },{
         id: 2,
         before: true,
         text: 'Avez-vous des animaux?',
       },{
+        id: 2,
+        before: true,
+        text: 'Disposez-vous de canots?',
+      },{
+        id: 2,
+        before: true,
+        text: "Disposez-vous de système de flotaison?",
+      },{
         id: 3,
         before: true,
         text: 'Si vous avez répondus oui à la question précédente, combien et avez-vous des cages et/ou muselière?',
-      },{
-        id: 4,
-        before: true,
-        text: "Est-ce qu\'il y à des gens avec une santé à risque? Si oui, expliquez",
       },{
         id: 5,
         text: "Quelle est la hauteur de l'eau? Indiqué l'unité de mesure utilisé",

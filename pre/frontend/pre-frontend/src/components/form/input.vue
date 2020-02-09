@@ -1,12 +1,10 @@
 <template>
-    <div class="input-container">
-      <div class="input-with-placeholder">
-          <input type="text" @input="onInput">
-          <div class="placeholder">
-            {{ question.text }}
-          </div>
-      </div>
+  <div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" @input="onInput" :id="question.id">
+      <label class="mdl-textfield__label" :for="question.id">{{ question.text }}</label>
     </div>
+  </div>
 </template>
 
 <script>

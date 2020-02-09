@@ -1,19 +1,23 @@
 <template>
-  <div class="input-container radio">
+  <div class="form-radio">
     <div class="placeholder">
       {{ question.text }}
     </div>
 
     <label 
+    class="mdl-radio mdl-js-radio"
+    style="margin-right: 10px;"
     v-for="posibility in question.posibility" 
     :key="posibility.value">
       <input 
+        class="mdl-radio__button"
         :value="posibility.value" 
         type="radio"
         :checked="value == posibility.value"
         @change="onClick(posibility.value)"
       >
-      {{ posibility.text }}
+      <span class="mdl-radio__label">{{ posibility.text }}</span>
+      
     </label> 
   </div>
 </template>
