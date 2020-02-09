@@ -36,7 +36,7 @@
         <div v-if="inRisk !== undefined">
             {{inRisk ? 'Vous êtes à risque' : "vous n'êtes pas à risque"}}
         </div>
-        <div v-if="inRisk" class="button-container">
+        <div v-if="address" class="button-container">
             <button @click="submit">
                 S'inscrire
             </button>
